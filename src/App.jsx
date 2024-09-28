@@ -1,27 +1,28 @@
-import React from 'react'
-import Navbar from './components/Navbar/Navbar'
-import Hero from './components/Hero/Hero'
-import Programs from './components/Programs/Programs'
-import Title from './components/Title/Title'
-import About from './components/About/About'
-import Projects from './components/Projects/Projects'
-import Footer from './components/Footer/Footer'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
+
+// Import your pages
+import Home from './components/Pages/Home/Home';
+import Products from './components/Pages/Products/Products';
+import Community from './components/Pages/Community/Community';
+import Profile from './components/Pages/Profile/Profile';
 
 const App = () => {
+  console.log("Home component rendered");
   return (
     <div>
-      <Navbar/>
-      <Hero/>
-      <div>
-        <About/>
-        <Title subTitle='INTERESTS' title='What I Offer'/>
-        <Programs/>
-        <Title subTitle='PROJECTS' title='Some Projects I did in My Leisure Time'/>
-        <Projects/>
+          <Navbar/>
+          <Routes>
+            <Route path="/" element={<Home/>} /> 
+            <Route path="/products" element={<Products/>} /> 
+            <Route path="/community" element={<Community/>} /> 
+            <Route path="/profile" element={<Profile/>} />
+          </Routes>
         <Footer/>
-      </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
