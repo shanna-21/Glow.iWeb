@@ -1,0 +1,80 @@
+nav{
+    width: 100%;
+    /* background: #333; */
+    color: white;
+    padding: 4px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.logo{
+    width: 150px;
+    padding-top: 10px;
+    
+}
+nav ul{
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center items horizontally */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    list-style: none; /* Remove bullet points */
+}
+
+nav ul img {
+    width: 28px;
+    cursor: pointer; /* Make icons clickable */
+}
+
+nav ul img.git-icon{
+    width: 30px;
+    cursor: pointer; /* Make icons clickable */
+}
+nav ul img.linked-icon{
+    width: 30px;
+    cursor: pointer; /* Make icons clickable */
+}
+nav ul li{
+    display: inline-block;
+    justify-content: center;
+    list-style: none;
+    margin: 5px 10px;
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+
+.container{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.btn{
+    background-color: #fff;
+    color: #212122;
+    padding: 14px 25px;
+    /* background-color: red; */
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 0;
+    cursor: pointer;
+    outline: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn img{
+    width: 10px;
+    margin-left: 10px;
+}
+
+.dark-nav{
+    background: #212ea0;
+    transition: 0.3s;
+}
