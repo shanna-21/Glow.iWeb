@@ -1,0 +1,68 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.container-form {
+  text-align: center;
+  padding: 20px;
+}
+
+.header-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.time-form {
+  font-size: 16px;
+}
+
+.status-bar-form {
+  display: flex;
+}
+
+.status-icon-form {
+  margin-left: 5px;
+}
+
+.content-form h1 {
+  font-size: 28px;
+  color: #3a3a3a;
+}
+
+.content-form p {
+  font-size: 16px;
+  color: #5a5a5a;
+}
+
+.jellyfish-icon-form {
+  width: 150px;
+  height: auto;
+  margin: 20px 0;
+}
+
+.message-form {
+  margin: 10px 0 20px 0;
+  color: #5a5a5a;
+}
+
+.take-quiz-btn-form {
+  background-color: #add8e6;
+  color: white;
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.take-quiz-btn-form:hover {
+  background-color: #91c3d6;
+}
