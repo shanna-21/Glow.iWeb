@@ -13,8 +13,8 @@ nav{
 }
 
 .logo{
-    width: 150px;
-    padding-top: 10px;
+    width: 130px;
+    margin: 15px;
     
 }
 nav ul{
@@ -75,6 +75,6 @@ nav ul li{
 }
 
 .dark-nav{
-    background: #212ea0;
+    background: #313E65;
     transition: 0.3s;
 }

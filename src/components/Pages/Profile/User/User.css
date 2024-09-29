@@ -1,0 +1,122 @@
+.profile-page-container {
+    display: flex;
+    justify-content: space-between; /* Adjusted from space-around to space-between */
+    padding: 20px;
+    background-size: cover;
+    /* background-color: red; */
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh; /* Takes the full height of the viewport */
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't add extra width */
+    align-items: flex-start; /* Aligns the items to the top */
+  }
+  
+  /* Left section: User profile and details */
+.profile-section {
+    width: 37%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+  
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+  
+.profile-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+  
+.profile-username {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+  
+.profile-bio {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+  
+.edit-profile-btn {
+    padding: 10px 20px;
+    background-color: #88CFF1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.edit-profile-btn:hover {
+    background-color: #88CFF1;
+}
+  
+.profile-details {
+    text-align: left;
+}
+  
+.profile-details h3 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+  
+  .profile-details p {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+  }
+  
+  /* Right section: Posts, Cart, Liked Forum, Saved Forum */
+  .activity-section {
+    width: 60%;
+  }
+  
+  .activity-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .activity-container h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .activity-container ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .activity-container li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .activity-container li:last-child {
+    border-bottom: none;
+  }
+
+  .profile-pict {
+    width: 150px;           /* Set the width of the image */
+    height: 150px;          /* Set the height of the image */
+    border-radius: 50%;     /* Make the image circular */
+    object-fit: cover;      /* Ensures the image fits within the circle without stretching */
+    border: 2px solid #ccc; /* Optional: Add a border around the circle */
+}

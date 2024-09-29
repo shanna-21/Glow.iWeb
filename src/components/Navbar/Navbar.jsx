@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Navbar.css'
 // import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
-import logo from '../../assets/logo4.png'
+import logo from '../../assets/Logo-glowi-2.png'
 // import mail from '../../assets/mail-icon-1.png'
 // import linkedin from '../../assets/linkedin-icon.png'
 // import Github from '../../assets/github-icon-1.png'
@@ -10,14 +10,13 @@ import logo from '../../assets/logo4.png'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-
 const[sticky, setSticky] = useState(false);
 
-// useEffect(()=>{
-//     window.addEventListener('scroll', ()=>{
-//         window.scrollY > 100 ? setSticky(true) : setSticky(false)
-//     })
-// },[])
+useEffect(()=>{
+    window.addEventListener('scroll', ()=>{
+        window.scrollY > 100 ? setSticky(true) : setSticky(false)
+    })
+},[])
 
 // const scrollToSection = (sectionId) => {
 //   document.getElementById(selectId).scrollIntoView({behavior: 'smooth'});
