@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Quiz.css";
 import successmascot from "../../../assets/mascot-2.png";
+import { useNavigate } from "react-router-dom";
 
 function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -16,6 +17,7 @@ function Quiz() {
   const [hasAllergy, setHasAllergy] = useState(null);
   const [allergyInput, setAllergyInput] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const submitData = async () => {
     const formData = {
@@ -58,6 +60,12 @@ function Quiz() {
     if (currentQuestion > 1) {
       setCurrentQuestion(currentQuestion - 1);
     }
+  };
+
+ 
+
+  const handlePreviousPage = () => {
+    navigate("/take-quiz");
   };
 
   const handleSkincareConcern = (concern) => {
@@ -335,9 +343,16 @@ function Quiz() {
         </>
       )}
       <div className="container-bottom-form-quiz">
-        <button className="back-button" onClick={handleBack}>
-          &#8592;
-        </button>
+        {currentQuestion != 1 ? (
+          <button className="back-button" onClick={handleBack}>
+            &#8592;
+          </button>
+        ) : (
+          <button className="back-button" onClick={handlePreviousPage}>
+            &#8592;
+          </button>
+        )}
+
         <button
           className="next-button"
           onClick={handleNext}
