@@ -6,10 +6,11 @@ import Hero from '../Profile/Hero-profile/Hero-profile'
 const Profile = () => {
     return (
       <div>
+        {/* <Navbar/> */}
         <Hero/>
-      <div className="user-container">
-          <User/>
-      </div>
+        <div className="user-container">
+            <User/>
+        </div>
       </div>
   )
 };
