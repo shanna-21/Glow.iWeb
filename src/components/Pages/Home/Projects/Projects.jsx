@@ -1,14 +1,14 @@
 import React, { useRef } from 'react'
 import './Projects.css'
-import back_btn from '../../assets/next-btn.png'
-import next_btn from '../../assets/back-btn.png'
-import Pupigo from '../../assets/PuPiGo-project.png'
-import CO2 from '../../assets/CO2-1.jpg'
-import guidance from '../../assets/GuidanceWeb.png'
-import Heart from '../../assets/HeartDisease_DecisionTree.jpeg'
-import Restaurant from '../../assets/Restaurant-img.jpg'
-import Ephemeral from '../../assets/Ephemeral.jpeg'
-import Compnet from '../../assets/Compnet.jpeg'
+import back_btn from '../../../../assets/next-btn.png'
+import next_btn from '../../../../assets/back-btn.png'
+import Pupigo from '../../../../assets/PuPiGo-project.png'
+import CO2 from '../../../../assets/CO2-1.jpg'
+import guidance from '../../../../assets/GuidanceWeb.png'
+import Heart from '../../../../assets/HeartDisease_DecisionTree.jpeg'
+import Restaurant from '../../../../assets/Restaurant-img.jpg'
+import Ephemeral from '../../../../assets/Ephemeral.jpeg'
+import Compnet from '../../../../assets/Compnet.jpeg'
 
 const Projects = () => {
 

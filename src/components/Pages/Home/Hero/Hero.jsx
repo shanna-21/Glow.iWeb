@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './Hero.css'
-import arrow from '../../assets/arrow.png'
-import mail from '../../assets/email-icon.png'
+// import arrow from '../../assets/arrow.png'
+// import mail from '../../assets/email-icon.png'
 
 const Hero = () => {
   const [text, setText] = useState('')
