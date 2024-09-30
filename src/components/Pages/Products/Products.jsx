@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../../../components/Navbar/Navbar";
-
 import "./Products.css";
 import {useNavigate} from "react-router-dom";
 
@@ -12,7 +10,6 @@ const Products = () => {
   };
   return (
     <div>
-      <Navbar />
       <div className="container-form">
         <div className="content-form">
           <h1>Hi, Tiffany!</h1>
