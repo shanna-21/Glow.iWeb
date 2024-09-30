@@ -6,10 +6,49 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedSkincareRoutine, setSelectedSkincareRoutine] = useState(null);
+  const [skincareConcern, setSkincareConcern] = useState([]);
+  const [eyeAreaConcern, setEyeAreaConcern] = useState(null);
+  const [skinType, setSkinType] = useState(null);
+  const [skinSensitive, setSkinSensitive] = useState(null);
+  const [hasAllergy, setHasAllergy] = useState(null);
+  const [allergyInput, setAllergyInput] = useState("");
+  const [email, setEmail] = useState("");
+
+  const submitData = async () => {
+    const formData = {
+      selectedDate,
+      selectedGender,
+      selectedSkincareRoutine,
+      skincareConcern,
+      eyeAreaConcern,
+      skinType,
+      skinSensitive,
+      hasAllergy,
+      allergyInput,
+      email,
+    };
+
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      console.log("Data submitted:", data);
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
 
   const handleNext = () => {
     if (currentQuestion < 10) {
       setCurrentQuestion(currentQuestion + 1);
+    } else if (currentQuestion === 10) {
+      submitData();
     }
   };
 
@@ -19,12 +58,37 @@ function Quiz() {
     }
   };
 
+  const handleSkincareConcern = (concern) => {
+    if (skincareConcern.includes(concern)) {
+      setSkincareConcern(skincareConcern.filter((item) => item !== concern));
+    } else {
+      setSkincareConcern([...skincareConcern, concern]);
+    }
+  };
+
   const isNextEnabled = () => {
     if (currentQuestion === 1) {
       return selectedDate !== null;
     } else if (currentQuestion === 2) {
       return selectedGender !== null;
+    } else if (currentQuestion === 3) {
+      return selectedSkincareRoutine !== null;
+    } else if (currentQuestion === 4) {
+      return skincareConcern.length > 0;
+    } else if (currentQuestion === 5) {
+      return eyeAreaConcern !== null;
+    } else if (currentQuestion === 6) {
+      return skinType !== null;
+    } else if (currentQuestion === 7) {
+      return skinSensitive !== null;
+    } else if (currentQuestion === 8) {
+      return (
+        hasAllergy === "No" || (hasAllergy === "Yes" && allergyInput !== "")
+      );
+    } else if (currentQuestion === 9) {
+      return email !== "";
     }
+
     return true;
   };
 
@@ -68,6 +132,176 @@ function Quiz() {
         </>
       )}
 
+      {currentQuestion === 3 && (
+        <>
+          <p>What kind of skincare routine are you looking for, Tiffany?</p>
+          <div className="gender-options">
+            <button
+              className={`gender-btn ${
+                selectedSkincareRoutine === "Keep it simple - Im a basic person"
+                  ? "selected"
+                  : ""
+              }`}
+              onClick={() =>
+                setSelectedSkincareRoutine("Keep it simple - Im a basic person")
+              }
+            >
+              Keep it simple - Im a basic person
+            </button>
+            <button
+              className={`gender-btn ${
+                selectedSkincareRoutine ===
+                "Advanced skincare - I’m ready to level up my routine"
+                  ? "selected"
+                  : ""
+              }`}
+              onClick={() =>
+                setSelectedSkincareRoutine(
+                  "Advanced skincare - I’m ready to level up my routine"
+                )
+              }
+            >
+              Advanced skincare - I’m ready to level up my routine
+            </button>
+            <button
+              className={`gender-btn ${
+                selectedSkincareRoutine ===
+                "I dont know 😭 - I’m new to skincare"
+                  ? "selected"
+                  : ""
+              }`}
+              onClick={() =>
+                setSelectedSkincareRoutine(
+                  "I dont know 😭 - I’m new to skincare"
+                )
+              }
+            >
+              I dont know 😭 - I’m new to skincare
+            </button>
+          </div>
+        </>
+      )}
+
+      {currentQuestion === 4 && (
+        <>
+          <p>What is your main skincare concern? Select one or more options.</p>
+          <div className="skincare-concern-options">
+            {[
+              "Blemishes & breakout",
+              "Uneven skin texture",
+              "Fine lines & wrinkles",
+              "Blackheads",
+            ].map((concern) => (
+              <button
+                key={concern}
+                className={`concern-btn ${
+                  skincareConcern.includes(concern) ? "selected" : ""
+                }`}
+                onClick={() => handleSkincareConcern(concern)}
+              >
+                {concern}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {currentQuestion === 5 && (
+        <>
+          <p>Do you have any eye area concerns?</p>
+          <div className="eye-area-options">
+            {[
+              "Dark circles",
+              "Fine lines & wrinkles",
+              "Under eye puffiness",
+              "All three",
+              "None",
+            ].map((concern) => (
+              <button
+                key={concern}
+                className={`eye-concern-btn ${
+                  eyeAreaConcern === concern ? "selected" : ""
+                }`}
+                onClick={() => setEyeAreaConcern(concern)}
+              >
+                {concern}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {currentQuestion === 6 && (
+        <>
+          <p>Which of the below best describes your skin type?</p>
+          <div className="skin-type-options">
+            {["Combination", "Dry skin", "Normal skin", "Oily skin"].map(
+              (type) => (
+                <button
+                  key={type}
+                  className={`skin-type-btn ${
+                    skinType === type ? "selected" : ""
+                  }`}
+                  onClick={() => setSkinType(type)}
+                >
+                  {type}
+                </button>
+              )
+            )}
+          </div>
+        </>
+      )}
+      {currentQuestion === 7 && (
+        <>
+          <p>Is your skin sensitive, Anthony?</p>
+          <div className="skin-senstive-options">
+            {["Yes", "No", "A Little"].map((answer) => (
+              <button
+                key={answer}
+                className={`skin-senstive-btn ${
+                  skinSensitive === answer ? "selected" : ""
+                }`}
+                onClick={() => setSkinSensitive(answer)}
+              >
+                {answer}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {currentQuestion === 8 && (
+        <>
+          <p>Do you have any allergy?</p>
+          <div className="allergy-options">
+            <button
+              className={`allergy-btn ${
+                hasAllergy === "Yes" ? "selected" : ""
+              }`}
+              onClick={() => setHasAllergy("Yes")}
+            >
+              Yes
+            </button>
+            <button
+              className={`allergy-btn ${hasAllergy === "No" ? "selected" : ""}`}
+              onClick={() => setHasAllergy("No")}
+            >
+              No
+            </button>
+          </div>
+          {hasAllergy === "Yes" && (
+            <div className="allergy-input">
+              <input
+                type="text"
+                placeholder="Type your allergy"
+                value={allergyInput}
+                onChange={(e) => setAllergyInput(e.target.value)}
+              />
+            </div>
+          )}
+        </>
+      )}
+
       <div className="quiz-navigation">
         {currentQuestion > 1 && (
           <button className="back-btn" onClick={handleBack}>
@@ -82,6 +316,26 @@ function Quiz() {
           Next &#8594;
         </button>
       </div>
+
+      {currentQuestion === 9 && (
+        <>
+          <p>Would you like your skincare routine sent to your email?</p>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email address"
+            className="email-input"
+          />
+        </>
+      )}
+
+      {currentQuestion === 10 && (
+        <>
+          <h2>You’re all set!</h2>
+          <img src="https://your-image-link.com/jellyfish.png" alt="Success" />
+        </>
+      )}
 
       <p>{currentQuestion} of 10</p>
     </div>
