@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #fff;
+  background-color: #9d4b4b;
 }
 
 .container-form {
@@ -61,6 +61,7 @@ body {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .take-quiz-btn-form:hover {
