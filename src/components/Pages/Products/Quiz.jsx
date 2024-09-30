@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./Quiz.css";
+import successmascot from "../../../assets/mascot-2.png";
 
 function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -100,6 +102,7 @@ function Quiz() {
         <>
           <p>What's your date of birth?</p>
           <DatePicker
+            className="datepicker-input"
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             dateFormat="MMMM d, yyyy"
@@ -134,7 +137,7 @@ function Quiz() {
 
       {currentQuestion === 3 && (
         <>
-          <p>What kind of skincare routine are you looking for, Tiffany?</p>
+          <p>What kind of skincare routine are you looking for?</p>
           <div className="gender-options">
             <button
               className={`gender-btn ${
@@ -194,7 +197,7 @@ function Quiz() {
             ].map((concern) => (
               <button
                 key={concern}
-                className={`concern-btn ${
+                className={`gender-btn ${
                   skincareConcern.includes(concern) ? "selected" : ""
                 }`}
                 onClick={() => handleSkincareConcern(concern)}
@@ -219,7 +222,7 @@ function Quiz() {
             ].map((concern) => (
               <button
                 key={concern}
-                className={`eye-concern-btn ${
+                className={`gender-btn ${
                   eyeAreaConcern === concern ? "selected" : ""
                 }`}
                 onClick={() => setEyeAreaConcern(concern)}
@@ -239,7 +242,7 @@ function Quiz() {
               (type) => (
                 <button
                   key={type}
-                  className={`skin-type-btn ${
+                  className={`gender-btn ${
                     skinType === type ? "selected" : ""
                   }`}
                   onClick={() => setSkinType(type)}
@@ -253,37 +256,47 @@ function Quiz() {
       )}
       {currentQuestion === 7 && (
         <>
-          <p>Is your skin sensitive, Anthony?</p>
+          <p>Is your skin sensitive?</p>
           <div className="skin-senstive-options">
-            {["Yes", "No", "A Little"].map((answer) => (
-              <button
-                key={answer}
-                className={`skin-senstive-btn ${
-                  skinSensitive === answer ? "selected" : ""
-                }`}
-                onClick={() => setSkinSensitive(answer)}
-              >
-                {answer}
-              </button>
-            ))}
+            <button
+              className={`gender-btn ${
+                skinSensitive === "Yes" ? "selected" : ""
+              }`}
+              onClick={() => setSkinSensitive("Yes")}
+            >
+              Yes
+            </button>
+            <button
+              className={`gender-btn ${
+                skinSensitive === "No" ? "selected" : ""
+              }`}
+              onClick={() => setSkinSensitive("No")}
+            >
+              No
+            </button>
+            <button
+              className={`gender-btn ${
+                skinSensitive === "A Little" ? "selected" : ""
+              }`}
+              onClick={() => setSkinSensitive("No")}
+            >
+              A Little
+            </button>
           </div>
         </>
       )}
-
       {currentQuestion === 8 && (
         <>
           <p>Do you have any allergy?</p>
           <div className="allergy-options">
             <button
-              className={`allergy-btn ${
-                hasAllergy === "Yes" ? "selected" : ""
-              }`}
+              className={`gender-btn ${hasAllergy === "Yes" ? "selected" : ""}`}
               onClick={() => setHasAllergy("Yes")}
             >
               Yes
             </button>
             <button
-              className={`allergy-btn ${hasAllergy === "No" ? "selected" : ""}`}
+              className={`gender-btn ${hasAllergy === "No" ? "selected" : ""}`}
               onClick={() => setHasAllergy("No")}
             >
               No
@@ -302,21 +315,6 @@ function Quiz() {
         </>
       )}
 
-      <div className="quiz-navigation">
-        {currentQuestion > 1 && (
-          <button className="back-btn" onClick={handleBack}>
-            &#8592; Back
-          </button>
-        )}
-        <button
-          className="next-btn"
-          onClick={handleNext}
-          disabled={!isNextEnabled()}
-        >
-          Next &#8594;
-        </button>
-      </div>
-
       {currentQuestion === 9 && (
         <>
           <p>Would you like your skincare routine sent to your email?</p>
@@ -333,11 +331,22 @@ function Quiz() {
       {currentQuestion === 10 && (
         <>
           <h2>You’re all set!</h2>
-          <img src="https://your-image-link.com/jellyfish.png" alt="Success" />
+          <img src={successmascot} alt="Success" />
         </>
       )}
-
-      <p>{currentQuestion} of 10</p>
+      <div className="container-bottom-form-quiz">
+        <button className="back-button" onClick={handleBack}>
+          &#8592;
+        </button>
+        <button
+          className="next-button"
+          onClick={handleNext}
+          disabled={!isNextEnabled()}
+        >
+          &#8594;
+        </button>
+      </div>
+      <h6>{currentQuestion} of 10</h6>
     </div>
   );
 }

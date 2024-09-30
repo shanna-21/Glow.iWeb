@@ -1,7 +1,7 @@
 import React from "react";
 import "./Products.css";
 import {useNavigate} from "react-router-dom";
-
+import mascot from "../../../assets/mascot-1.png";
 const Products = () => {
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const Products = () => {
           <h1>Hi, Tiffany!</h1>
           <p>You're almost there!</p>
           <img
-            src="https://path-to-your-jellyfish-image.png"
+            src={mascot}
             alt="Jellyfish Icon"
             className="jellyfish-icon-form"
           />
