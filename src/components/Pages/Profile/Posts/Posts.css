@@ -1,0 +1,102 @@
+.post-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .post-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .post-username {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .post-content {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .post-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .like-btn, .save-btn {
+    padding: 10px 15px;
+    border: none;
+    background-color: #88CFF1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .like-btn:hover, .save-btn:hover {
+    background-color: #67BCE5;
+  }
+
+  .large-font {
+    font-size: xxx-large;
+  }
+  
+  .top-20 {
+    position: relative;
+    top: 20vh;
+  }
+  
+  ion-icon.active {
+    animation: like 0.5s 1;
+    fill: red;
+    stroke: none;
+  }
+  
+  ion-icon {
+    fill: transparent;
+    stroke: black;
+    stroke-width: 30;
+    transition: all 0.5s;
+  }
+  
+  /* Standard rule */
+@keyframes like {
+    0% {
+        transform: scale(1);
+    }
+    90% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+/* WebKit-specific rule for older browsers */
+@-webkit-keyframes like {
+    0% {
+        transform: scale(1);
+    }
+    90% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+  

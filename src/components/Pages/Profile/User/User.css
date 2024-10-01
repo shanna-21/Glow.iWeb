@@ -119,4 +119,76 @@
     border-radius: 50%;     /* Make the image circular */
     object-fit: cover;      /* Ensures the image fits within the circle without stretching */
     border: 2px solid #ccc; /* Optional: Add a border around the circle */
+  }
+  
+  .post-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+  }
+  
+  .post-header {
+    display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  /* background-color: red; */
+}
+
+.post-profile-pict {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  justify-content: right;
+  align-items: center;
+  /* margin: 10px; */
+  gap: 20px;
+  /* background-color: green; */
+}
+
+.like-btn, .save-btn {
+  background-color: #88CFF1;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* IonIcon for the heart button */
+ion-icon {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 20;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+ion-icon.active {
+  fill: red;
+  stroke: none;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  background-color: #88CFF1;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

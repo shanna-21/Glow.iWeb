@@ -1,6 +1,6 @@
 .hero-profile{
     width: 100%;
-    min-height: 100vh;
+    min-height: 150vh;
     background: linear-gradient(rgba(8, 0, 58, 0.7),rgba(131, 189, 255, 0.7)), url('../../../../assets/derma.jpg');
     background-size: cover;
     background-position: cover;
