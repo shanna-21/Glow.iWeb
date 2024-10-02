@@ -14,12 +14,16 @@ const ProductCard = () => {
         <span>10RB++ sold</span>
       </div>
       <div className="product-details">
-        <h2>Ceramic Skin Saviour Moisturizer Gel</h2>
-        <div className="product-price">
-          <span>Rp. 263,000</span>
+        <div className="product-price-mascot-container">
+          <div className="product-price-container">
+            <h2>Ceramic Skin Saviour Moisturizer Gel</h2>
+            <div className="product-price">
+              <span>Rp. 263,000</span>
+            </div>
+          </div>
+
           <img src={mascot} alt="glow-i mascot" />
         </div>
-
         <button className="add-to-cart">Add to Cart</button>
       </div>
     </div>
