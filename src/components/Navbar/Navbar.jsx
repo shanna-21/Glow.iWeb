@@ -28,6 +28,7 @@ useEffect(()=>{
         <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/take-quiz'>Quiz</Link></li>
+            <li><Link to='/products'>Products</Link></li>
             <li><Link to='/community'>Community</Link></li>
             <li><Link to='/profile'>Profile</Link></li>
             {/* <li>

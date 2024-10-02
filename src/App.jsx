@@ -7,6 +7,8 @@ import Products from "./components/Pages/Products/Products";
 import Community from "./components/Pages/Community/Community";
 import Profile from "./components/Pages/Profile/Profile";
 import Quiz from "./components/Pages/Products/Quiz";
+import ProductSearch from "./components/Pages/Product-search/product-search";
+
 
 const App = () => {
   console.log("Home component rendered");
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/products" element={<products />} />
       </Routes>
       <Footer />
     </div>
