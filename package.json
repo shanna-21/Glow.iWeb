@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ionic/react": "^8.3.1",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@ionic/react": "^8.3.2",
     "ionicons": "^7.4.0",
     "react": "^18.3.1",
     "react-datepicker": "^7.4.0",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-router-dom": "^6.26.2",
     "react-scroll": "^1.9.0"
   },

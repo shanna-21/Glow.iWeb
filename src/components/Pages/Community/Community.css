@@ -1,0 +1,102 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.comhead{
+    position: relative;
+    top: -80px;
+    width: 1280px;
+    height: 175px;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.comheadpic{
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 100%;
+    /* height: auto; */
+}
+
+.comsidebar{
+    background-color: white;
+    width: 250px;
+    height: 250px;
+    margin-left: 50px;
+    margin-top: 50px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.community-page h1{
+    margin-left: 125px;
+    margin-bottom: -20px;
+    user-select: none;
+    width: 100px;
+    color: #313E65;
+}
+
+.comsidebar .insidebar{
+    padding-top: 29px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.comsidebar .insidebar h3{
+    margin-top: 30px;
+    color: #313E65;
+}
+
+.comsidebar .insidebar h3:hover{
+    color: #88CFF1;
+    cursor: pointer;
+}
+
+.insidebar h3.active{
+    color: #88CFF1;
+}
+
+.comcontent{
+    display: flex;
+}
+
+.forumcontent{
+    margin-left: 130px;
+}
+
+.trendz .blocks h4 svg{
+    margin-right: 10px;
+    color: #313E65;
+}
+
+/* .trendz{
+    margin-top: -25px;
+} */
+
+.blocks{
+    background-color: white;
+    padding: 60px 100px;
+    margin-bottom: 35px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.trend-post{
+    padding-right: 330px;
+}
+
+.trend-post h5{
+    padding-top: 25px;
+    color: #313E65;
+}
+
+.com-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #313E65;
+}
