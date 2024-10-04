@@ -3,7 +3,9 @@ body {
   background-size: cover;
 }
 .product-search-container {
-  margin-top: 200px;
+  position: absolute;
+  top: 100px;
+  left: 200px;
 }
 
 .search-container {
@@ -13,7 +15,7 @@ body {
 }
 
 .search-container input {
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 20px;
   padding: 10px;
