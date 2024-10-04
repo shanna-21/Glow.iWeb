@@ -1,9 +1,7 @@
-import React, {useState} from "react";
-import "./Product-search.css";
-import ProductCard from "./Product-card";
-import "./Product-search.css";
+import React from "react";
+import {useParams} from "react-router-dom";
 import imageProduct from "../../../assets/imageProducts.png";
-
+import {useNavigate} from "react-router-dom";
 const products = [
   {
     id: 1,
@@ -127,39 +125,31 @@ const products = [
   },
 ];
 
-function ProductSearch() {
-  const [searchTerm, setSearchTerm] = useState("");
+function ProductDetail() {
+  const {id} = useParams();
+  const product = products.find((product) => product.id === parseInt(id));
+  const navigate = useNavigate()
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+  if (!product) {
+    return <h2>Product not found</h2>;
+  }
+
+  const handleBack = () => {
+    navigate("/products-search")
   };
-
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <>
-      <div className="space-products">
-        <div className="product-search-container">
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search Product"
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-          </div>
-
-          <div className="product-grid">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
+      <button onClick={handleBack}> back </button>
+      <div className="product-detail">
+        <h2>{product.name}</h2>
+        <img src={product.image} alt={product.name} />
+        <p>Price: {product.price}</p>
+        <p>{product.sold}</p>
+        <p>Rating: {product.rating} stars</p>
       </div>
     </>
   );
 }
 
-export default ProductSearch;
+export default ProductDetail;
