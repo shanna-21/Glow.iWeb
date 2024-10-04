@@ -1,9 +1,10 @@
-.hero-profile{
+.hero{
     width: 100%;
-    min-height: 150vh;
-    background: linear-gradient(rgba(8, 0, 58, 0.7),rgba(131, 189, 255, 0.7)), url('../../../../assets/derma.jpg');
+    /* background-color: red; */
+    min-height: 200vh;
+    background: linear-gradient(rgba(8, 0, 58, 0.7),rgba(8,0,58,0.7)), url('../../assets/derma.jpg');
     background-size: cover;
-    background-position: cover;
+    background-position: center;
     color: #fff;
     display: flex;
     align-items: center;
@@ -11,8 +12,9 @@
 }
 
 .hero-text{
+    background-color: blue;
     text-align: center;
-    max-width: 100%;
+    max-width: 800px;
 }
 
 .hero-text h1{

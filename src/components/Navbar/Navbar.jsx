@@ -31,6 +31,7 @@ useEffect(()=>{
             <li><Link to='/products-search'>Products</Link></li>
             <li><Link to='/community'>Community</Link></li>
             <li><Link to='/profile'>Profile</Link></li>
+            <li><Link to='/News'>News</Link></li>
             {/* <li>
               <img onClick={() => window.location.href='mailto:shanna.fernlie@gmail.com?subject=Hello&body=I%20wanted%20to%20reach%20out.'} className='mail-icon' src={mail} alt="" />
             </li>

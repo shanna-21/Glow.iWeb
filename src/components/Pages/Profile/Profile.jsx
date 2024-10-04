@@ -1,16 +1,13 @@
 import React from "react"
 import './Profile.css'
 import User from '../Profile/User/User'
-import Hero from '../Profile/Hero-profile/Hero-profile'
+import Hero from './Hero-profile/HeroProfile'
 
 const Profile = () => {
     return (
-      <div>
-        {/* <Navbar/> */}
+      <div className="profile-container">
         <Hero/>
-        <div className="user-container">
-            <User/>
-        </div>
+        <User/>
       </div>
   )
 };

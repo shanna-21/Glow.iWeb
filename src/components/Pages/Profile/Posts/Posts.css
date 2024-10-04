@@ -1,102 +1,223 @@
-.post-container {
+
+
+.profile-page-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  overflow: hidden;
+  /* background-color: red; */
+}
+  
+  /* Left section: User profile and details */
+.profile-section {
+    width: 37%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+  
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+  
+.profile-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+  
+.profile-username {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+  
+.profile-bio {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+  
+.edit-profile-btn {
+    padding: 10px 20px;
+    background-color: #88CFF1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.edit-profile-btn:hover {
+    background-color: #88CFF1;
+}
+  
+.profile-details {
+    text-align: left;
+}
+  
+.profile-details h3 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+  
+  .profile-details p {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+  }
+  
+  /* Right section: Posts, Cart, Liked Forum, Saved Forum */
+  .activity-section {
+    width: 60%;
+  }
+  
+  .activity-container {
     background-color: white;
     padding: 20px;
+    overflow: auto;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
   }
   
-  .post-header {
-    display: flex;
-    align-items: center;
+  .activity-container h3 {
+    font-size: 1.4rem;
+    color: #333;
     margin-bottom: 10px;
   }
   
-  .post-profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+  .activity-container ul {
+    list-style-type: none;
+    padding-left: 0;
   }
   
-  .post-username {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .post-content {
+  .activity-container li {
     font-size: 1rem;
     color: #555;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
   }
   
-  .post-actions {
+  .activity-container li:last-child {
+    border-bottom: none;
+  }
+
+  .profile-pict {
+    width: 150px;           /* Set the width of the image */
+    height: 150px;          /* Set the height of the image */
+    border-radius: 50%;     /* Make the image circular */
+    object-fit: cover;      /* Ensures the image fits within the circle without stretching */
+    border: 2px solid #ccc; /* Optional: Add a border around the circle */
+  }
+  
+  .post-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    /* background-color: blue; */
   }
   
-  .like-btn, .save-btn {
-    padding: 10px 15px;
-    border: none;
-    background-color: #88CFF1;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .like-btn:hover, .save-btn:hover {
-    background-color: #67BCE5;
-  }
-
-  .large-font {
-    font-size: xxx-large;
-  }
-  
-  .top-20 {
-    position: relative;
-    top: 20vh;
-  }
-  
-  ion-icon.active {
-    animation: like 0.5s 1;
-    fill: red;
-    stroke: none;
-  }
-  
-  ion-icon {
-    fill: transparent;
-    stroke: black;
-    stroke-width: 30;
-    transition: all 0.5s;
-  }
-  
-  /* Standard rule */
-@keyframes like {
-    0% {
-        transform: scale(1);
-    }
-    90% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1.1);
-    }
+  .post-header {
+    display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  /* background-color: red; */
 }
 
-/* WebKit-specific rule for older browsers */
-@-webkit-keyframes like {
-    0% {
-        transform: scale(1);
-    }
-    90% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1.1);
-    }
+.post-profile-pict {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-  
+.post-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  justify-content: right;
+  align-items: center;
+  /* margin: 10px; */
+  gap: 20px;
+  /* background-color: green; */
+}
+
+.content-your-post{
+  width: 70%;
+}
+
+.liked-button{
+  align-items: center;
+  /* display: flex; */
+  justify-content: flex-start;
+  /* background-color: #777; */
+  margin-right: 10px;
+}
+
+.liked-button p {
+  margin-right: px; 
+  /* background-color: red; */
+}
+
+.like-btn, .save-btn {
+  background-color: #88CFF1;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* IonIcon for the heart button */
+ion-icon {
+  fill: transparent;
+  stroke: black;
+  stroke-width: 20;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin-left: 15px;
+  /* margin-right: 10px; */
+  /* justify-content: flex-start; */
+}
+
+ion-icon.active {
+  fill: #F3C2C2;
+  stroke: none;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  background-color: #88CFF1;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn:hover{
+  background-color: #313E65;
+  color: white;
+}
+
+
+

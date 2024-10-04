@@ -20,7 +20,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className='hero container'>
+    <div className="hero container">
       <div className="hero-text">
         <h1>{text}</h1>
         <p> 

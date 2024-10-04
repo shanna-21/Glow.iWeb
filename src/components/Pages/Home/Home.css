@@ -1,9 +1,20 @@
 .homecon {
-    max-width: 1200px;
     margin: 0 auto;
+    width: 100%;     /* full width but within the max-width */
     padding: 20px;
-    all: unset;
     display: block;
+    box-sizing: border-box; /* ensures padding is included in the element's total width/height */
 }
 
-  
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+    .homecon {
+        max-width: 90%; /* Set a wider max-width for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .homecon {
+        max-width: 1200px; /* Set a specific max-width for large screens */
+    }
+}

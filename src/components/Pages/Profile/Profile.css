@@ -1,14 +1,6 @@
-.user-container {
-    display: flex;             /* Use flexbox for positioning */
-    justify-content: center;   /* Centers the User component horizontally */
-    align-items: center;       /* Centers the User component vertically */
-    min-height: 100vh;
-    /* background-size: cover; */
-    /* background-color: red; */
-    padding: 20px;
-    width: 1300px;
-}
-
-.user-container > div {
-    width: 100%;              /* Full width of the container */
-}
+.profile-container {
+    overflow: auto; /* Allows scrolling if content is too large */
+    margin-top: 20px; /* Spacing from Hero component */
+    /* background-color: blue; */
+    /* width: 100vh; */
+  }
