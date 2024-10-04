@@ -1,0 +1,22 @@
+.product-reviews {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+}
+
+.review-item {
+  margin-bottom: 10px;
+}
+
+.toggle-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  display: inline-block;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
