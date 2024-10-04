@@ -1,20 +1,25 @@
 .homecon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
     margin: 0 auto;
-    width: 100%;     /* full width but within the max-width */
-    padding: 20px;
+    width: 100%;
+    max-height: 100vh;
+    /* padding: 20px; */
     display: block;
-    box-sizing: border-box; /* ensures padding is included in the element's total width/height */
+    box-sizing: border-box;
 }
 
 /* Media queries for responsiveness */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .homecon {
         max-width: 90%; /* Set a wider max-width for medium screens */
     }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
     .homecon {
-        max-width: 1200px; /* Set a specific max-width for large screens */
+        max-width: 1200px;
     }
 }
