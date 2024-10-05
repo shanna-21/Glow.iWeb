@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import imageProduct from "../../../assets/imageProducts.png";
 import "./Product-Detail.css";
-
+import image2 from "./../../../assets/Foodmate.jpeg"
 const products = [
   {
     id: 1,
@@ -10,6 +10,7 @@ const products = [
     price: "Rp. 263.000",
     sold: "10RB++ sold",
     image: imageProduct,
+    image2:image2,
     rating: 5,
     reviews: [
       {
@@ -231,6 +232,8 @@ function ProductDetail() {
 
   const [isReviewsOpen, setIsReviewsOpen] = useState(false);
   const [isIngredientsOpen, setIsIngredientsOpen] = useState(true);
+  const [isPic1, setIsPic1] = useState(true);
+  const [isPPic2, setIsPic2] = useState(false);
 
   if (!product) {
     return <h2>Product not found</h2>;
@@ -249,6 +252,15 @@ function ProductDetail() {
     setIsIngredientsOpen(!isIngredientsOpen);
   };
 
+  const handlepic1 = () => {
+    setIsPic1(!isPic1);
+    setIsPic2(!isPPic2);
+  };
+  const handlepic2 = () => {
+    setIsPic1(!isPic1);
+    setIsPic2(!isPPic2);
+  };
+
   return (
     <div className="product-detail">
       <button onClick={handleBack} className="back-button">
@@ -256,15 +268,50 @@ function ProductDetail() {
         ← Back{" "}
       </button>
       <div className="product-info">
-        <h2>{product.name}</h2>
-        <img src={product.image} alt={product.name} className="product-image" />
-        <p>Price: {product.price}</p>
-        <p>{product.sold}</p>
-        <p>Rating: {product.rating} stars</p>
+        <div className="product-header-info">
+          <div className="left-side-product-header">
+            {isPic1 && <img
+              src={product.image}
+              alt={product.name}
+              className="product-image"
+            />}
+            {isPPic2 && <img
+              src={product.image2}
+              alt={product.name}
+              className="product-image"
+            /> }
+            <div className="product-header-container-image">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="product-image"
+                onClick={handlepic1}
+              />
+              <img
+                src={product.image2}
+                alt={product.name}
+                className="product-image"
+                onClick={handlepic2}
+              />
+            </div>
+          </div>
+          <div className="right-side-product-header">
+            <h2>{product.name}</h2>
+            <p>Price: {product.price}</p>
+            <p>{product.sold}</p>
+            <p>Rating: {product.rating} stars</p>
+          </div>
+        </div>
 
-        <button onClick={toggleIngredients} className="toggle-button">
-          {isIngredientsOpen ? "Hide Ingredients" : "Show Ingredients"}
-        </button>
+        <div className="button-container">
+          <button onClick={toggleIngredients} className="toggle-button">
+            {isIngredientsOpen ? "Hide Ingredients" : "Show Ingredients"}
+          </button>
+          <button onClick={toggleReviews} className="toggle-button">
+            {isReviewsOpen ? "Hide Reviews" : "Show Reviews"}
+          </button>
+        </div>
+
         {isIngredientsOpen && (
           <div className="product-ingredients">
             <h3>Ingredients</h3>
@@ -272,9 +319,6 @@ function ProductDetail() {
           </div>
         )}
 
-        <button onClick={toggleReviews} className="toggle-button">
-          {isReviewsOpen ? "Hide Reviews" : "Show Reviews"}
-        </button>
         {isReviewsOpen && (
           <div className="product-reviews">
             <h3>Reviews</h3>
