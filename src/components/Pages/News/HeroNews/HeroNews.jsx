@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import './HeroProfile.css'
+import './HeroNews.css'
 // import arrow from '../../assets/arrow.png'
 // import mail from '../../assets/email-icon.png'
 
 const Hero = () => {
   const [text, setText] = useState('')
-  const message = ".Profile";
+  const message = ".News";
   const typingSpeed = 100;
 
   useEffect(() => {

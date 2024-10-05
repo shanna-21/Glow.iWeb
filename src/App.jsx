@@ -8,12 +8,16 @@ import Community from "./components/Pages/Community/Community";
 import Profile from "./components/Pages/Profile/Profile";
 import Quiz from "./components/Pages/Products/Quiz";
 import ProductSearch from  "../src/components/Pages/ProductSearch/Product-search.jsx"
+import ProductDetail from "./components/Pages/ProductSearch/Product-Detail.jsx";
+import News from "./components/Pages/News/News.jsx"
+
 
 const App = () => {
   console.log("Home component rendered");
   return (
     <div>
       <Navbar />
+      {/* <Hero/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/take-quiz" element={<Products />} />
@@ -21,9 +25,13 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/products-search" element={<ProductSearch />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         {/* <Route path="/products-card" element={<ProductCard />} /> */}
+        <Route path="/news" element={<News/>} />
       </Routes>
-      <Footer />
+      <div className="footer-container">
+        {/* <Footer /> */}
+      </div>
     </div>
   );
 };

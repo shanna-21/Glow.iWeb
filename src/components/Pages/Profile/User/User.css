@@ -1,22 +1,31 @@
 
 .grand-user-container{
-  display: flex;
-    flex-direction: column; /* Ensure items stack vertically */
-    justify-content: flex-start; /* Start stacking from the top */
-    overflow: auto; /* Allow scrolling if content overflows */
-    height: 100vh; /* Full height of the viewport */
+    /* position: absolute; */
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    position: absolute;
+    /* background-color: red; */
 }
 
 .profile-page-container {
+  display: flex;
+  
+  /* position: absolute; */
   height: 100%; /* Let the content grow to fit the container */
-    overflow-y: auto; /* Enable vertical scroll when content overflows */
-    padding: 10px; /* Optional padding */
+  overflow-y: auto; /* Enable vertical scroll when content overflows */
+  padding: 20px; /* Optional padding */
 }
   
   /* Left section: User profile and details */
 .profile-section {
+    background-color: #fff;
     width: 37%;
     padding: 20px;
+    margin: 15px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -59,17 +68,43 @@
 }
   
 .edit-profile-btn:hover {
-    background-color: #88CFF1;
+    background-color: #224f64;
 }
   
 .profile-details {
-    text-align: left;
+  margin: 30px;
+  text-align: left;
+  padding: 15px; /* Optional: Adds rounded corners */
+  background-color: #fff; /* Optional: White background for a clean look */
+    
 }
   
 .profile-details h3 {
     font-size: 1.2rem;
     color: #555;
-    margin-bottom: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 10px;
+}
+
+.profile-details h3:hover {
+  font-size: 1.2rem;
+  color: #88CFF1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #313E65; /* Light gray border */
+  border-radius: 10px;
+}
+
+.profile-details h3:active {
+  font-size: 1.2rem;
+  color: #88CFF1;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #313E65;
+  border: 1px solid #313E65; /* Light gray border */
+  border-radius: 10px;
 }
   
   .profile-details p {
@@ -81,6 +116,7 @@
   /* Right section: Posts, Cart, Liked Forum, Saved Forum */
   .activity-section {
     width: 60%;
+    margin: 15px;
   }
   
   .activity-container {
@@ -220,5 +256,93 @@ ion-icon.active {
   color: white;
 }
 
+/* Expandable sections */
+.toggle-section {
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s ease;
+  padding-bottom: 10px;
+}
+
+.toggle-section:hover {
+  color: #88CFF1;
+}
+
+/* Buttons for navigation */
+.navigation-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.navigation-buttons button {
+  background-color: #88CFF1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navigation-buttons button:hover {
+  background-color: #313E65;
+}
 
 
+.schedule-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.schedule-section {
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-section h2 {
+  font-size: 1.8em;
+  color: #5a5a5a;
+  margin-bottom: 10px;
+}
+
+.schedule-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.schedule-section ul li {
+  font-size: 1.2em;
+  padding: 8px 0;
+  color: #4a4a4a;
+  border-bottom: 1px solid #ececec;
+}
+
+.schedule-section ul li:last-child {
+  border-bottom: none;
+}
+
+.schedule-section ul li::before {
+  content: "•";
+  color: #F3C2C2;
+  margin-right: 10px;
+}
+
+.schedule-container ul li:hover {
+  color: #F3C2C2;
+}

@@ -1,6 +1,4 @@
 .profile-container {
     overflow: auto; /* Allows scrolling if content is too large */
-    margin-top: 20px; /* Spacing from Hero component */
-    /* background-color: blue; */
-    /* width: 100vh; */
+    
   }
