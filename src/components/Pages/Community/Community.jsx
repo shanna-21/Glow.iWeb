@@ -2,17 +2,31 @@ import React from "react"
 import {isValidElement, useState} from "react"
 import comimg from '../../../assets/community.png'
 import './Community.css'
+import './Posts/Post'
 import { CgProfile } from "react-icons/cg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark as save } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark as saved } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as like } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as liked } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { ImOpera } from "react-icons/im"
 
 const Community = () => {
 
-  const [activeItem, setActiveItem] = useState('Trending');  
+  const [activeItem, setActiveItem] = useState('Trending'); 
+  const [selectedPost, setSelectedPost] = useState(null);
+  
+  const handlePostClick = (post) => {
+    console.log("Post clicked:", post);
+    setSelectedPost(post);
+  }
 
+  const handleBack = () => {
+    setSelectedPost(null);
+  }
+
+    
   return (
       <div className="community-page">
         {/* header */}
@@ -27,26 +41,35 @@ const Community = () => {
           <div className="comsidebar">
             <div className="insidebar">
               <h3 className={activeItem === 'Trending' ? 'active' : ''} 
-              onClick={() => setActiveItem('Trending')}> Trending </h3>
+                onClick={() => {setActiveItem('Trending'); setSelectedPost(null); }}>
+                Trending </h3>
               <h3 className={activeItem === 'TopForum' ? 'active' : ''} 
-                onClick={() => setActiveItem('TopForum')}> Top Forum </h3>
+                onClick={() => {setActiveItem('TopForum'); setSelectedPost(null); }}> 
+                Top Forum </h3>
               <h3 className={activeItem === 'MostLiked' ? 'active' : ''} 
-                onClick={() => setActiveItem('MostLiked')}> Most Liked </h3>
+                onClick={() => {setActiveItem('MostLiked'); setSelectedPost(null); }}> 
+                Most Liked </h3>
             </div>
           </div>
 
           {/* Content area where the "pages" are rendered based on activeItem */}
-          <div className="forumcontent" >
-            {activeItem === 'Trending' && <Trending />}
-            {activeItem === 'TopForum' && <TopForum />}
-            {activeItem === 'MostLiked' && <MostLiked />}
-          </div>
+          <div className="forumcontent">
+            {!selectedPost ? (
+              <>
+                {activeItem === 'Trending' && <Trending onSelectPost={setSelectedPost} />}
+                {activeItem === 'TopForum' && <TopForum onSelectPost={setSelectedPost} />}
+                {activeItem === 'MostLiked' && <MostLiked onSelectPost={setSelectedPost} />}
+              </>
+            ) : (
+              <Posts post={selectedPost} onBack={() => setSelectedPost(null)} />
+            )}
+        </div>
         </div>
       </div>
   );
 };
 
-const Trending = () => {
+const Trending = ({ onSelectPost }) => {
 
   const posts = [
     { id: 1, user: 'Sarah Linster', comments: 34, likes: '21.1k', content: 'This skincare is top notch!' },
@@ -70,10 +93,12 @@ const Trending = () => {
     setLikedPosts(updatedLikedPosts);
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div>
+    <div className="com-scroll">
       {posts.map((post, index) => (
-        <div className="blocks" key={post.id}>
+        <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
           <div className="trend-post">
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
@@ -96,7 +121,7 @@ const Trending = () => {
   );
 };
 
-const TopForum = () => {
+const TopForum = ({ onSelectPost }) => {
   const posts = [
     { id: 1, user: 'Nicki Minah', comments: 104, likes: '99k', content: 'Ga boong ini jelekkk banget' },
     { id: 2, user: 'Dr.Lee Dyah', comments: 32, likes: '51.2k', content: 'Hati-hati dengan merk..' },
@@ -121,9 +146,9 @@ const TopForum = () => {
   };
 
   return (
-    <div>
+    <div className="com-scroll">
       {posts.map((post, index) => (
-        <div className="blocks" key={post.id}>
+        <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
           <div className="trend-post">
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
@@ -146,9 +171,52 @@ const TopForum = () => {
   );
 };
 
-const MostLiked = () => {
+const MostLiked = ({ onSelectPost }) => {
+  const posts = [
+    { id: 1, user: 'Nicki Minah', comments: 104, likes: '99k', content: 'Ga boong ini jelekkk banget' },
+    { id: 2, user: 'Dr.Lee Dyah', comments: 32, likes: '51.2k', content: 'Hati-hati dengan merk..' },
+    { id: 3, user: 'John Doe', comments: 12, likes: '5.2k', content: 'Great product, highly recommend!' }
+  ];
+
+  const [savedPosts, setSavedPosts] = useState(Array(posts.length).fill(false));
+  const [likedPosts, setLikedPosts] = useState(Array(posts.length).fill(false));
+
+  const handleSaveToggle = (index) => {
+    const updatedSavedPosts = [...savedPosts];
+    updatedSavedPosts[index] = !updatedSavedPosts[index];
+    setSavedPosts(updatedSavedPosts);
+  };
+
+  // Toggle like status for a specific post by index
+  const handleLikeToggle = (index) => {
+    const updatedLikedPosts = [...likedPosts];
+    updatedLikedPosts[index] = !updatedLikedPosts[index];
+    setLikedPosts(updatedLikedPosts);
+  };
+
   return (
-    <h1>This is Most Liked</h1>
+    <div className="com-scroll">
+      {posts.map((post, index) => (
+        <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+          <div className="trend-post">
+            <h4><CgProfile /> {post.user}</h4>
+            <p>{post.content}</p>
+            <h5>{post.comments} comments</h5>
+          </div>
+          <div className="com-icon">
+            <div>
+              <FontAwesomeIcon icon={savedPosts[index] ? saved : save}
+                onClick={() => handleSaveToggle(index)} style={{ cursor: 'pointer' }}/>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={likedPosts[index] ? liked : like}
+                onClick={() => handleLikeToggle(index)} style={{ cursor: 'pointer' }}/>
+              <h6>{post.likes}</h6>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
