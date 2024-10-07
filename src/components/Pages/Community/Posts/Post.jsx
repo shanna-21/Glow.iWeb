@@ -7,13 +7,12 @@ import { faBookmark as save } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark as saved } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as like } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as liked } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 
 const Posts = ({ post, onBack }) => {
 
-    const navigate = useNavigate();
     const { state } = useLocation();
 
     if (!post) {
