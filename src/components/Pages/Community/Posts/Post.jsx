@@ -20,8 +20,9 @@ const Posts = ({ post, onBack }) => {
       return <div>Post not found</div>; 
     }
     
-    const [savedPosts, setSavedPosts] = useState({});
-    const [likedPosts, setLikedPosts] = useState({});
+    const [savedPosts, setSavedPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
+    const [likedComments, setLikedComments] = useState({});
   
     const handleSaveToggle = (index) => {
       const updatedSavedPosts = [...savedPosts];
@@ -34,6 +35,13 @@ const Posts = ({ post, onBack }) => {
       updatedLikedPosts[index] = !updatedLikedPosts[index];
       setLikedPosts(updatedLikedPosts);
     };
+
+    const handleCommentLikeToggle = (commentId) => {
+      setLikedComments((prevLikedComments) => ({
+          ...prevLikedComments,
+          [commentId]: !prevLikedComments[commentId], 
+      }));
+  };
   
     const comments = [
       {id: 1, user: 'Sarah Linster', comment: 'Setuju banget!!!', date: '08-18-2024', like: 30},
@@ -80,13 +88,13 @@ const Posts = ({ post, onBack }) => {
                     <p>{com.comment}</p>
                     <div className="comment-details">
                       <div className="date-reply">
-                        <h6>{com.date}4</h6>
+                        <h6>{com.date}</h6>
                         <h6>Reply</h6>
                       </div>
                       <div className="comment-likes">
                         <h6>{com.like}</h6>
-                        <FontAwesomeIcon icon={likedPosts[post.id - 1] ? liked : like}
-                          onClick={() => handleLikeToggle(post.id - 1)} style={{ cursor: 'pointer' }}/>
+                        <FontAwesomeIcon icon={likedComments[com.id - 1] ? liked : like}
+                          onClick={() => handleCommentLikeToggle(com.id - 1)} style={{ cursor: 'pointer' }}/>
                       </div>
                     </div>
                   </div>

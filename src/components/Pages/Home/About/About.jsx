@@ -1,15 +1,15 @@
 import React from 'react'
 import './About.css'
-import portrait from '../../../../assets/self-portrait.jpg'
+import bubbles from '../../../../assets/mascot-1.png'
 
 const About = () => {
   return (
     <div className='about'>
         <div className="about-left">
-            <img src={portrait} alt="" />
+            <img src={bubbles} alt="" />
         </div>
         <div className="about-right">
-            <h3>ABOUT ME</h3>
+            <h3>ABOUT GLOW.I</h3>
             <h2>A Tech Enthusiast with a Creative Mind</h2>
             <p>
             I am currently a third-year student at Bina Nusantara University, working on various projects. At the same time, I am undertaking a part-time job teaching English in Guidance School.
