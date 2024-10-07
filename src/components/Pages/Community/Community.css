@@ -5,11 +5,11 @@
 
 .comhead{
     position: sticky;
-    top: -20px;
+    top: -35px;
     width: 1280px;
-    height: 120px;
+    height: 150px;
     overflow: hidden;
-    margin-bottom: 130px;
+    margin-bottom: 100px;
 }
 
 .comheadpic{
@@ -44,7 +44,7 @@
 }
 
 .comsidebar .insidebar{
-    padding-top: 29px;
+    padding-top: 20px;
     padding-left: 50px;
     padding-right: 50px;
 }
@@ -85,13 +85,14 @@
     display: flex;
     justify-content: space-between;
     user-select: none;
+    cursor: pointer;
 }
 
 .com-scroll {
     margin-left: 250px;
     height: 500px; 
     overflow-y: scroll; 
-    margin-bottom: 30px;
+    /* margin-bottom: 20px; */
     color: #313E65;
 }
 

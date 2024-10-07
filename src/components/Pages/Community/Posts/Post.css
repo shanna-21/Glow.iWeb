@@ -3,110 +3,88 @@
     margin: 0;
 }
 
-.comhead{
-    position: sticky;
-    top: -20px;
-    width: 1280px;
-    height: 120px;
-    overflow: hidden;
-    margin-bottom: 130px;
-}
-
-.comheadpic{
-    position: absolute;
-    top: -80px;
-    left: 0;
-    width: 100%;
-    /* height: auto; */
-}
-
-.comsidebar{
+.block-post{
     background-color: white;
-    width: 250px;
-    height: 250px;
-    margin-left: 50px;
-    margin-top: 50px;
-    text-align: center;
+    margin-left: 225px;
+    padding: 40px 100px;
+    margin-top: -30px;
+    color: #313E65;
     border-radius: 20px;
 }
 
-.community-page h1{
-    margin-left: 125px;
-    margin-bottom: -20px;
-    user-select: none;
-    width: 100px;
-    color: #313E65;
-    position: fixed;
-}
-
-.comsidebar{
-    position: fixed;
-}
-
-.comsidebar .insidebar{
-    padding-top: 29px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-.comsidebar .insidebar h3{
-    margin-top: 30px;
-    color: #313E65;
-}
-
-.comsidebar .insidebar h3:hover{
-    color: #88CFF1;
+.block-post button{
+    margin-right: 250px;
+    background: none;
+    border: none;
     cursor: pointer;
+    margin-bottom: 18px;
 }
 
-.insidebar h3.active{
-    color: #88CFF1;
-}
-
-.comcontent{
-    display: flex;
-}
-
-.forumcontent{
-    margin-left: 130px;
-}
-
-.trendz .blocks h4 svg{
+.in-post h2 svg{
     margin-right: 10px;
-    color: #313E65;
+}
+
+.in-post img{
+    max-height: 120px;
+}
+
+.post-add{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+
+.post-icons svg{
+    margin-left: 5px;
+}
+
+.post-desc{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px black;
 }
 
 
-.blocks{
+.full-post{
+    display: flex;
+}
+
+.comment-block{
     background-color: white;
-    padding: 60px 100px;
-    margin-bottom: 35px;
+    margin-left: 40px;
+    color: #313E65;
+    padding: 10px 65px;
+    border-radius: 20px;
+}
+
+.comment-details{
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-reply{
+    display: flex;
+}
+
+.comment-likes{
+    display: flex;
+}
+
+.comment-type{
     border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    user-select: none;
+    border: 1px ;
 }
 
-.com-scroll {
-    margin-left: 250px;
-    height: 500px; 
-    overflow-y: scroll; 
-    margin-bottom: 30px;
-    color: #313E65;
+#comtype{
+    border-radius: 10px;
+    padding-right: 120px;
+    padding-left: 10px;
+    padding-top: 12px;
 }
 
-.trend-post{
-    padding-right: 330px;
+.comment-block h3{
+    text-align: center;
+    margin: 0 85px;
 }
 
-.trend-post h5{
-    padding-top: 25px;
-    color: #313E65;
-}
-
-.com-icon{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: #313E65;
-}

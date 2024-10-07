@@ -2,30 +2,19 @@ import React from "react"
 import {isValidElement, useState} from "react"
 import comimg from '../../../assets/community.png'
 import './Community.css'
-import './Posts/Post'
+import Posts from './Posts/Post'
 import { CgProfile } from "react-icons/cg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark as save } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark as saved } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as like } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as liked } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
-import { ImOpera } from "react-icons/im"
+import img1 from '../../../assets/post-review.jpg'
 
 const Community = () => {
 
   const [activeItem, setActiveItem] = useState('Trending'); 
   const [selectedPost, setSelectedPost] = useState(null);
-  
-  const handlePostClick = (post) => {
-    console.log("Post clicked:", post);
-    setSelectedPost(post);
-  }
-
-  const handleBack = () => {
-    setSelectedPost(null);
-  }
-
     
   return (
       <div className="community-page">
@@ -63,7 +52,7 @@ const Community = () => {
             ) : (
               <Posts post={selectedPost} onBack={() => setSelectedPost(null)} />
             )}
-        </div>
+          </div>
         </div>
       </div>
   );
@@ -72,7 +61,7 @@ const Community = () => {
 const Trending = ({ onSelectPost }) => {
 
   const posts = [
-    { id: 1, user: 'Sarah Linster', comments: 34, likes: '21.1k', content: 'This skincare is top notch!' },
+    { id: 1, user: 'Sarah Linster', comments: 34, likes: '21.1k', content: 'This skincare is top notch!', image: img1},
     { id: 2, user: 'John Doe', comments: 12, likes: '5.2k', content: 'Great product, highly recommend!' },
     { id: 3, user: 'John Doe', comments: 12, likes: '5.2k', content: 'Great product, highly recommend!' }
   ];
@@ -93,12 +82,11 @@ const Trending = ({ onSelectPost }) => {
     setLikedPosts(updatedLikedPosts);
   };
 
-  const navigate = useNavigate();
-
   return (
     <div className="com-scroll">
       {posts.map((post, index) => (
-        <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+        // <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+        <div className="blocks" key={post.id} onClick={() => onSelectPost(post)}>
           <div className="trend-post">
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
@@ -148,7 +136,8 @@ const TopForum = ({ onSelectPost }) => {
   return (
     <div className="com-scroll">
       {posts.map((post, index) => (
-        <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+        // <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+        <div className="blocks" key={post.id} onClick={() => onSelectPost(post)}>
           <div className="trend-post">
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
@@ -197,7 +186,8 @@ const MostLiked = ({ onSelectPost }) => {
   return (
     <div className="com-scroll">
       {posts.map((post, index) => (
-        <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+        // <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
+        <div className="blocks" key={post.id} onClick={() => onSelectPost(post)}>
           <div className="trend-post">
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>

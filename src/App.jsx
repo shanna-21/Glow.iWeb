@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/news" element={<News/>} />
       </Routes>
       <div className="footer-container">
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </div>
   );
