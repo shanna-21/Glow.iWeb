@@ -1,48 +1,108 @@
-import React from 'react'
-import './Recommendation.css'
-import program_1_icon from '../../../../assets/program-1-icon.png'
-import program_2_icon from '../../../../assets/uiux-icon.png'
-import program_3_icon from '../../../../assets/program-3-icon.png'
+import React, { useState } from 'react';
+import './Recommendation.css';
 
-import dryskin from '../../../../assets/dry-skin-icon.png'
-import acne from '../../../../assets/pimple-icon.png'
-import eyebag from '../../../../assets/dark-eye-icon.png'
-import necessities from '../../../../assets/more-icon.png'
+import dryskin from '../../../../assets/dry-skin-icon.png';
+import acne from '../../../../assets/pimple-icon.png';
+import eyebag from '../../../../assets/dark-eye-icon.png';
+import necessities from '../../../../assets/more-icon.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
+
+const Modal = ({ isOpen, onClose, content }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button className="modal-close" onClick={onClose}><FontAwesomeIcon icon={faX} /></button>
+        <h4>What you can do</h4>
+        <h2>{content.title}</h2>
+        <ul>
+          {content.description.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 const Programs = () => {
-  return (
-    <div className='programs'>
-        <div className="program">
-            <img src={dryskin} alt="" />
-            <div className="caption">
-                <img src={program_1_icon} alt="" />
-                <p>Dry Skin</p>
-            </div>
-        </div>
-        <div className="program">
-            <img src={acne} alt="" />
-            <div className="caption">
-                <img src={program_2_icon} alt="" />
-                <p>Acne</p>
-            </div>
-        </div>
-        <div className="program">
-            <img src={eyebag} alt="" />
-            <div className="caption">
-                <img src={program_3_icon} alt="" />
-                <p>Eyebag</p>
-            </div>
-        </div>
-        <div className="program">
-            <img src={necessities} alt="" />
-            <div className="caption">
-                <img src={program_3_icon} alt="" />
-                <p>Necessities</p>
-            </div>
-        </div>
-        
-    </div>
-  )
-}
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedProgram, setSelectedProgram] = useState(null);
 
-export default Programs
+  const programs = [
+    { 
+      img: dryskin, 
+      title: 'Dry Skin', 
+      description: ['Use a humidifier', 
+        'Use a moisturizing soap', 
+        'Add moisture daily',
+        'Moisture right after washing',
+        'Drink plenty of water', 
+        'Avoid hot showers',
+        'Avoid using harsh soap',
+        'Gently wash your face'] 
+    },
+    { 
+      img: acne, 
+      title: 'Acne', 
+      description: ['Wash your face twice a day and after sweating', 
+        'Stop scrubbing your face and other acne-prone skin', 
+        'Resist touching, picking, and popping your acne',
+        'Properly wash your face',
+        'Stay hydrated',
+        'Limit makeup',
+        'Try not to touch face',
+        'Limit sun exposure',] 
+    },
+    { 
+      img: eyebag, 
+      title: 'Eyebag', 
+      description: ['Use a cool compress on your eyes', 
+        'Make sure you get enough sleep', 
+        'Sleep with your head raised slightly',
+        'Try to avoid drinking fluids before bed',
+        'Limit salt in your diet',
+        'Try to reduce your allergy symptoms',
+        'Don\'t smoke',
+        'Wear sunscreen every day',]  
+    },
+    { 
+      img: necessities, 
+      title: 'Necessities', 
+      description: ['Cleanser', 'Moisturizer', 'Sunscreen', 'Exfoliant'] 
+    }
+  ];
+
+  const openModal = (program) => {
+    setSelectedProgram(program);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedProgram(null);
+  };
+
+  return (
+    <div className="programs">
+      {programs.map((program, index) => (
+        <div key={index} className="program" onClick={() => openModal(program)}>
+          <img src={program.img} alt={program.title} />
+          <div className="caption">
+            <p>{program.title}</p>
+          </div>
+        </div>
+      ))}
+
+      <Modal 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+        content={selectedProgram || {}} 
+      />
+    </div>
+  );
+};
+
+export default Programs;
