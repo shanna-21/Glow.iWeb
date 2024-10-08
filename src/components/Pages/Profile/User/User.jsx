@@ -104,6 +104,11 @@ const User = () => {
   const [visibleSection, setVisibleSection] = useState('posts'); // Default to 'posts'
   const [selectedPost, setSelectedPost] = useState(null); // Track the selected post
 
+  // State to toggle the Journey, Routine, and Predict sections
+  const [isJourneyOpen, setJourneyOpen] = useState(false);
+  const [isRoutineOpen, setRoutineOpen] = useState(false);
+  const [isPredictOpen, setPredictOpen] = useState(false);
+
   const handleSave = (index) => {
     setSavedIndex(savedIndex === index ? null : index);
   };
@@ -125,6 +130,18 @@ const User = () => {
     setVisibleSection('fullPost'); // Switch to the full post view
   };
 
+  const toggleJourney = () => {
+    setJourneyOpen(!isJourneyOpen);
+  };
+
+  const toggleRoutine = () => {
+    setRoutineOpen(!isRoutineOpen);
+  };
+
+  const togglePredict = () => {
+    setPredictOpen(!isPredictOpen);
+  };
+
   return (
     <div className="grand-user-container">
       <Hero/>
@@ -137,7 +154,65 @@ const User = () => {
             <button className="edit-profile-btn">Edit Profile</button>
           </div>
 
-          {/* Add your sections like Journey, Routine, and Predict here */}
+          {/* Add the Journey, Routine, and Predict sections here */}
+          <div className="profile-details">
+            <h3 onClick={toggleJourney} className="toggle-section">Journey</h3>
+            {isJourneyOpen && 
+              <div className="line-chart-container">
+                <p>Here's your skincare journey! Tracking your skin progress over time:</p>
+                <LineChart />
+              </div>
+            }
+
+            <h3 onClick={toggleRoutine} className="toggle-section">Routine</h3>
+            {isRoutineOpen && 
+              <div className="routine-section">
+                <p>Here's your skincare routine:</p>
+                <div className="schedule-container">
+                  <h1>My Skincare Schedule</h1>
+
+                  <div className="schedule-section">
+                    <h2>Morning Routine</h2>
+                    <ul>
+                      <li>Cleanser</li>
+                      <li>Toner</li>
+                      <li>Serum (Vitamin C)</li>
+                      <li>Moisturizer</li>
+                      <li>Sunscreen</li>
+                    </ul>
+                  </div>
+
+                  <div className="schedule-section">
+                    <h2>Afternoon Routine</h2>
+                    <ul>
+                      <li>Hydrating Mist</li>
+                      <li>Reapply Sunscreen</li>
+                      <li>Eye Cream</li>
+                    </ul>
+                  </div>
+
+                  <div className="schedule-section">
+                    <h2>Night Routine</h2>
+                    <ul>
+                      <li>Makeup Remover</li>
+                      <li>Cleanser</li>
+                      <li>Toner</li>
+                      <li>Retinol Serum</li>
+                      <li>Moisturizer</li>
+                      <li>Night Cream</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <h3 onClick={togglePredict} className="toggle-section">Predict</h3>
+            {isPredictOpen && 
+              <div>
+                <p>Skin prediction analysis will be displayed here.</p>
+              </div>
+            }
+          </div>
 
         </div>
 
@@ -173,7 +248,7 @@ const User = () => {
                     <li key={index}>{item}</li>
                   ))
                 ) : (
-                  <p>No items in your cart yet.</p>
+                  <p>No liked forums yet.</p>
                 )}
               </ul>
             </div>
@@ -187,13 +262,11 @@ const User = () => {
                     <li key={index}>{item}</li>
                   ))
                 ) : (
-                  <p>No items in your cart yet.</p>
+                  <p>No saved forums yet.</p>
                 )}
               </ul>
             </div>
           )}
-
-          
 
           {/* List of posts */}
           {visibleSection === 'posts' && (
