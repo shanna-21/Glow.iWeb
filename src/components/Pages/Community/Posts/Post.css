@@ -6,8 +6,8 @@
 .block-post{
     background-color: white;
     margin-left: 225px;
-    padding: 40px 100px;
-    margin-top: -30px;
+    padding: 50px 100px;
+    /* margin-top: -30px; */
     color: #313E65;
     border-radius: 20px;
 }
@@ -42,38 +42,57 @@
 .post-desc{
     display: flex;
     justify-content: space-between;
-    border-top: 1px black;
+    /* border-top: 1px black; */
 }
-
 
 .full-post{
     display: flex;
+    margin-bottom: 25px;
 }
 
 .comment-block{
     background-color: white;
     margin-left: 40px;
     color: #313E65;
-    padding: 10px 65px;
+    padding: 30px 65px;
     border-radius: 20px;
+}
+
+.comments{
+    padding: 3px;
+    overflow-y: scroll;
+    height: 300px;
+}
+
+.com-sep{
+    margin-bottom: 25px;
+    border-bottom: 1px solid #313E65;;
 }
 
 .comment-details{
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
 }
 
 .date-reply{
     display: flex;
 }
 
+.date-reply h6{
+    margin-right: 13px;
+}
+
 .comment-likes{
     display: flex;
 }
 
+.comment-likes h6{
+    margin-right: 5px;
+}
+
 .comment-type{
-    border-radius: 15px;
-    border: 1px ;
+    margin-bottom: 10px;
 }
 
 #comtype{

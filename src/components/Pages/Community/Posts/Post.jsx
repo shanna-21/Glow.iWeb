@@ -7,21 +7,21 @@ import { faBookmark as save } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark as saved } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as like } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as liked } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 
 const Posts = ({ post, onBack }) => {
 
-    const navigate = useNavigate();
     const { state } = useLocation();
 
     if (!post) {
       return <div>Post not found</div>; 
     }
     
-    const [savedPosts, setSavedPosts] = useState({});
-    const [likedPosts, setLikedPosts] = useState({});
+    const [savedPosts, setSavedPosts] = useState([]);
+    const [likedPosts, setLikedPosts] = useState([]);
+    const [likedComments, setLikedComments] = useState({});
   
     const handleSaveToggle = (index) => {
       const updatedSavedPosts = [...savedPosts];
@@ -34,7 +34,21 @@ const Posts = ({ post, onBack }) => {
       updatedLikedPosts[index] = !updatedLikedPosts[index];
       setLikedPosts(updatedLikedPosts);
     };
+
+    const handleCommentLikeToggle = (commentId) => {
+      setLikedComments((prevLikedComments) => ({
+          ...prevLikedComments,
+          [commentId]: !prevLikedComments[commentId], 
+      }));
+  };
   
+    const comments = [
+      {id: 1, user: 'Sarah Linster', comment: 'Setuju banget!!!', date: '08-18-2024', like: 30},
+      {id: 2, user: 'Hans', comment: 'Sangat recommended!!', date: '08-18-2024', like: 17},
+      {id: 3, user: 'Jonathan', comment: 'Langsung mau beli lagii', date: '08-18-2024', like: 14},
+      {id: 4, user: 'Miley Cyrus', comment: 'Kerasa banget efeknyaa!', date: '08-18-2024', like: 10}
+    ]
+
     return(
         <div className="full-post">
             <div className="block-post"> 
@@ -67,19 +81,23 @@ const Posts = ({ post, onBack }) => {
                 <textarea name="commentbox" id="comtype" placeholder="Leave a comment here..."></textarea>
               </div>
               <div className="comments">
-                <h4><CgProfile /> Sinta</h4> 
-                <p>Setuju banget!!!</p>
-                <div className="comment-details">
-                  <div className="date-reply">
-                    <h6>08-18-2024</h6>
-                    <h6>Reply</h6>
+                {comments.map((com, index) => (
+                  <div key={index} className="com-sep">
+                    <h4><CgProfile /> {com.user} </h4> 
+                    <p>{com.comment}</p>
+                    <div className="comment-details">
+                      <div className="date-reply">
+                        <h6>{com.date}</h6>
+                        <h6>Reply</h6>
+                      </div>
+                      <div className="comment-likes">
+                        <h6>{com.like}</h6>
+                        <FontAwesomeIcon icon={likedComments[com.id - 1] ? liked : like}
+                          onClick={() => handleCommentLikeToggle(com.id - 1)} style={{ cursor: 'pointer' }}/>
+                      </div>
+                    </div>
                   </div>
-                  <div className="comment-likes">
-                    <h6>30</h6>
-                    <FontAwesomeIcon icon={likedPosts[post.id - 1] ? liked : like}
-                      onClick={() => handleLikeToggle(post.id - 1)} style={{ cursor: 'pointer' }}/>
-                  </div>
-                </div>
+                ))}
               </div>
           </div>
         </div>
