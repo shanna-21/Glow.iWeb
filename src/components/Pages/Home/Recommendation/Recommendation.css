@@ -1,6 +1,6 @@
 .programs{
     margin: 80px auto;
-    width: 93%;
+    width: 75%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,7 +13,7 @@
 }
 
 .program{
-    flex-basis: 22%;
+    flex-basis: 17%;
     position: relative;
 }
 
