@@ -3,7 +3,7 @@ import Hero from '../../Hero/Hero';
 import About from './About/About';
 import Programs from './Programs/Programs';
 import Title from './Title/Title';
-import Projects from './Projects/Projects';
+import Tips from './Tips/Tips';
 import './Home.css'
 
 const Home = () => {
@@ -11,10 +11,10 @@ const Home = () => {
     <div className="homecon">
         <Hero/>
         <About/>
-        <Title subTitle="INTERESTS" title="What I Offer" />
+        {/* <Title subTitle="PROJECTS" title="Some Projects I did in My Leisure Time" /> */}
+        <Tips/>
+        <Title subTitle="RECOMMENDATION" title="What You Can Do" />
         <Programs/>
-        <Title subTitle="PROJECTS" title="Some Projects I did in My Leisure Time" />
-        {/* <Projects/> */}
     </div>
   );
 };

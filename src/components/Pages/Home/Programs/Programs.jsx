@@ -31,6 +31,13 @@ const Programs = () => {
                 <p>Graphic Design</p>
             </div>
         </div>
+        <div className="program">
+            <img src={program_3} alt="" />
+            <div className="caption">
+                <img src={program_3_icon} alt="" />
+                <p>Graphic Design</p>
+            </div>
+        </div>
         
     </div>
   )
