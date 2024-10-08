@@ -43,12 +43,12 @@
   }
   
   .news-article {
-    background: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin: 10px; /* Space between cards */
     padding: 15px;
     width: calc(33.333% - 20px); /* Adjust width for three articles in a row */
+    background-color: red;
   }
   
   .article-image {
@@ -69,15 +69,17 @@
   
   .article-content {
     margin: 10px 0;
+    margin-bottom: 30px;
   }
   
   .read-more {
-    background-color: #007BFF;
+    background-color: #88CFF1;
     color: white;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
+    margin-bottom: 20px;
   }
   
   .read-more:hover {

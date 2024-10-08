@@ -3,7 +3,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Quiz.css";
 import successmascot from "../../../assets/mascot-2.png";
+import Hero from "../Profile/Hero-profile/HeroProfile"
+import Navbar from "../Products/Navbar/Navbar-Quiz"
 import { useNavigate } from "react-router-dom";
+
+
 
 function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -104,6 +108,7 @@ function Quiz() {
 
   return (
     <div className="quiz-container">
+
       <h1>Question {currentQuestion}</h1>
 
       {currentQuestion === 1 && (

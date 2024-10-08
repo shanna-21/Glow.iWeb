@@ -10,7 +10,7 @@ import Quiz from "./components/Pages/Products/Quiz";
 import ProductSearch from  "../src/components/Pages/ProductSearch/Product-search.jsx"
 import ProductDetail from "./components/Pages/ProductSearch/Product-Detail.jsx";
 import News from "./components/Pages/News/News.jsx"
-
+import NewsPage from "./components/Pages/News/NewsPage/NewsPage.jsx"
 
 const App = () => {
   console.log("Home component rendered");
@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/products-search" element={<ProductSearch />} />
+        <Route path="/article/:id" element={<NewsPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         {/* <Route path="/products-card" element={<ProductCard />} /> */}
         <Route path="/news" element={<News/>} />

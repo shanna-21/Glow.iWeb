@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import './Navbar.css'
+import './Navbar-Quiz.css'
 // import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
-import logo from '../../assets/Logo-glowi-2.png'
-// import mail from '../../assets/mail-icon-1.png'
-// import linkedin from '../../assets/linkedin-icon.png'
-// import Github from '../../assets/github-icon-1.png'
-
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import logo from '../../../../assets/logo-glowi.png'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -23,7 +18,8 @@ useEffect(()=>{
 // };
 
   return (
-    <nav className={`container ${sticky? 'dark-nav' : 'light-nav'}`}>
+    <nav>
+      <div className='nav-quiz'>
         <img src={logo} alt="" className='logo'/>
         <ul>
             <li><Link to='/'>Home</Link></li>
@@ -43,6 +39,7 @@ useEffect(()=>{
             </li> */}
 
         </ul>
+      </div>
     </nav>
   )
 }
