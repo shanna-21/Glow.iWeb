@@ -9,8 +9,8 @@ import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   LineElement,
-  CategoryScale, // For X axis
-  LinearScale, // For Y axis
+  CategoryScale, 
+  LinearScale, 
   PointElement,
   Title,
   Tooltip,
@@ -27,20 +27,19 @@ ChartJS.register(
   Legend
 );
 
-// LineChart component (integrated directly here)
 const LineChart = () => {
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'], // Time labels for X-axis
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [
       {
         label: 'Skincare Routine Progress',
-        data: [12, 19, 3, 5, 2, 3], // Sample data
+        data: [12, 19, 3, 5, 2, 3],
         borderColor: '#88CFF1',
         backgroundColor: 'rgba(136, 207, 241, 0.2)',
-        tension: 0.4, // Curve of the line
-        pointRadius: 5, // Point radius
-        pointBackgroundColor: '#224f64', // Color of points
-        fill: true, // Fill under the line
+        tension: 0.4, 
+        pointRadius: 5, 
+        pointBackgroundColor: '#224f64', 
+        fill: true, 
       },
     ],
   };
@@ -86,203 +85,212 @@ const User = () => {
   const [bio] = useState("This is a short bio about the user.");
   const [posts, setPosts] = useState([
     { 
+      id: 1,
       username: "user123", 
       content: "I started using a vitamin C serum, and my skin has never looked brighter! 🌟 #skincare", 
-      liked: false, likeCount: 5 
+      liked: false, 
+      likeCount: 5,
+      comments: [
+        { username: "commenter1", comment: "That's amazing! What brand are you using?" },
+        { username: "commenter2", comment: "I love vitamin C serums too!" },
+      ]
     },
-    { username: "user456", content: "Post 2 content here", liked: false, likeCount: 10 },
-    { username: "user789", content: "Post 3 content here", liked: false, likeCount: 0 }
+    { id: 2, username: "user456", content: "Post 2 content here", liked: false, likeCount: 10, comments: [] },
+    { id: 3, username: "user789", content: "Post 3 content here", liked: false, likeCount: 0, comments: [] }
   ]);
-  const [cartItems] = useState(["Skincare Item 1", "Skincare Item 2"]);
-  const [likedForums] = useState(["Liked Forum 1", "Liked Forum 2"]);
-  const [savedForums] = useState(["Saved Forum 1", "Saved Forum 2"]);
-
+  
   const [savedIndex, setSavedIndex] = useState(null);
+  const [cartItems] = useState([]); // Initialize cartItems
+  const [visibleSection, setVisibleSection] = useState('posts'); // Default to 'posts'
+  const [selectedPost, setSelectedPost] = useState(null); // Track the selected post
 
   const handleSave = (index) => {
-      setSavedIndex(savedIndex === index ? null : index); // Toggle between saved and unsaved
+    setSavedIndex(savedIndex === index ? null : index);
   };
-
-  const [journey, setJourney] = useState("Here is the user's skincare journey.");
-  const [routine, setRoutine] = useState("Here is the user's skincare routine.");
-  const [predict, setPredict] = useState("Here is the user's skincare prediction.");
-  
-  const [isJourneyOpen, setJourneyOpen] = useState(false);
-  const [isRoutineOpen, setRoutineOpen] = useState(false);
-  const [isPredictOpen, setPredictOpen] = useState(false);
-
-  const toggleJourney = () => setJourneyOpen(!isJourneyOpen);
-  const toggleRoutine = () => setRoutineOpen(!isRoutineOpen);
-  const togglePredict = () => setPredictOpen(!isPredictOpen);
 
   const handleLike = (index) => {
-      const updatedPosts = [...posts];
-      if (updatedPosts[index].liked) {
-          updatedPosts[index].likeCount -= 1;
-      } else {
-          updatedPosts[index].likeCount += 1;
-      }
-      updatedPosts[index].liked = !updatedPosts[index].liked;
-      setPosts(updatedPosts);
+    const updatedPosts = posts.map((post, i) =>
+      i === index ? { ...post, liked: !post.liked, likeCount: post.liked ? post.likeCount - 1 : post.likeCount + 1 } : post
+    );
+    setPosts(updatedPosts);
   };
 
-  const [visibleSection, setVisibleSection] = useState('posts'); // Default to 'posts'
-
   const showSection = (section) => {
-      setVisibleSection(section); // Set the visible section based on the button clicked
+    setVisibleSection(section);
+    setSelectedPost(null); // Reset selected post when navigating to another section
+  };
+
+  const showFullPost = (post) => {
+    setSelectedPost(post); // Set the clicked post as selected
+    setVisibleSection('fullPost'); // Switch to the full post view
   };
 
   return (
     <div className="grand-user-container">
       <Hero/>
       <div className="profile-page-container">
-      <div className="profile-section">
-        <div className="profile-header">
-          <img src={profile_img} className="profile-pict" alt="profile"/>
-          <h2 className="profile-username">{username}</h2>
-          <p className="profile-bio">{bio}</p>
-          <button className="edit-profile-btn">Edit Profile</button>
+        <div className="profile-section">
+          <div className="profile-header">
+            <img src={profile_img} className="profile-pict" alt="profile"/>
+            <h2 className="profile-username">{username}</h2>
+            <p className="profile-bio">{bio}</p>
+            <button className="edit-profile-btn">Edit Profile</button>
+          </div>
+
+          {/* Add your sections like Journey, Routine, and Predict here */}
+
         </div>
 
-        <div className="profile-details">
-          <h3 onClick={toggleJourney} className="toggle-section">Journey</h3>
-          {isJourneyOpen && 
-          
-            <div className="line-chart-container">
-              <p>{journey}</p>
-              <LineChart />
-              {/* <Line data={data} options={options} /> */}
+        {/* Render different sections based on visibleSection */}
+        <div className="activity-section">
+          <div className="navigation-buttons">
+            <button onClick={() => showSection('posts')}>Your Posts</button>
+            <button onClick={() => showSection('cart')}>Your Cart</button>
+            <button onClick={() => showSection('likedForums')}>Liked Forum</button>
+            <button onClick={() => showSection('savedForums')}>Saved Forum</button>
+          </div>
+
+          {visibleSection === 'cart' && (
+            <div className="activity-container" id="cart-section">
+              <h3>Your Cart</h3>
+              <ul>
+                {cartItems.length > 0 ? (
+                  cartItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))
+                ) : (
+                  <p>No items in your cart yet.</p>
+                )}
+              </ul>
             </div>
-          }
+          )}
+          {visibleSection === 'likedForums' && (
+            <div className="activity-container" id="cart-section">
+              <h3>Liked Forums</h3>
+              <ul>
+                {cartItems.length > 0 ? (
+                  cartItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))
+                ) : (
+                  <p>No items in your cart yet.</p>
+                )}
+              </ul>
+            </div>
+          )}
+          {visibleSection === 'savedForums' && (
+            <div className="activity-container" id="cart-section">
+              <h3>Saved Forum</h3>
+              <ul>
+                {cartItems.length > 0 ? (
+                  cartItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))
+                ) : (
+                  <p>No items in your cart yet.</p>
+                )}
+              </ul>
+            </div>
+          )}
+
           
 
-          <h3 onClick={toggleRoutine} className="toggle-section">Routine</h3>
-          {isRoutineOpen && 
-              <div className="routine-section">
-                <p>{routine}</p>
-                <div className="schedule-container">
-                  <h1>My Skincare Schedule</h1>
-
-                    <div className="schedule-section">
-                      <h2>Morning Routine</h2>
-                      <ul>
-                        <li>Cleanser</li>
-                        <li>Toner</li>
-                        <li>Serum (Vitamin C)</li>
-                        <li>Moisturizer</li>
-                        <li>Sunscreen</li>
-                      </ul>
+          {/* List of posts */}
+          {visibleSection === 'posts' && (
+            <div className="activity-container" id="posts-section">
+              <h3>Your Posts</h3>
+              <ul>
+                {posts.map((post, index) => (
+                  <li key={index} className="post-item" onClick={() => showFullPost(post)}>
+                    <div className="post-header">
+                      <img src={profile_img} alt="profile" className="post-profile-pict" />
+                      <h4>{post.username}</h4>
                     </div>
-
-                    <div className="schedule-section">
-                      <h2>Afternoon Routine</h2>
-                      <ul>
-                        <li>Hydrating Mist</li>
-                        <li>Reapply Sunscreen</li>
-                        <li>Eye Cream</li>
-                      </ul>
+                    <p className="content-your-post">{post.content}</p>
+                    <div className="post-actions">
+                      <div className="liked-button" onClick={(e) => e.stopPropagation() /* Prevent event propagation */}>
+                        <IonIcon
+                          icon={heart}
+                          className={post.liked ? 'active' : ''}
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent event propagation to parent
+                            handleLike(index);
+                          }}
+                        />
+                        <p>{post.likeCount} {post.likeCount <= 1 ? 'Like' : 'Likes'}</p>
+                      </div>
+                      <button className="save-btn" onClick={(e) => {
+                        e.stopPropagation(); // Prevent event propagation to parent
+                        handleSave(index);
+                      }}>
+                        {savedIndex === index ? 'Saved' : 'Save'}
+                      </button>
                     </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-                    <div className="schedule-section">
-                      <h2>Night Routine</h2>
-                      <ul>
-                        <li>Makeup Remover</li>
-                        <li>Cleanser</li>
-                        <li>Toner</li>
-                        <li>Retinol Serum</li>
-                        <li>Moisturizer</li>
-                        <li>Night Cream</li>
-                      </ul>
-                    </div>
+          {/* Full post view */}
+          {visibleSection === 'fullPost' && selectedPost && (
+              <div className="full-post-container">
+                <div className="full-post-header">
+                  <img src={profile_img} alt="" className="post-profile-pict" />
+                  <h3>{selectedPost.username}'s Post</h3>
+                </div>
+                <p>{selectedPost.content}</p>
+                <div className="post-action-full">
+                  <div className="liked-button">
+                    <IonIcon
+                      icon={heart}
+                      className={selectedPost.liked ? 'active' : ''}
+                      onClick={() => {
+                        
+                        const postIndex = posts.findIndex(post => post.id === selectedPost.id);
+                        const updatedPosts = [...posts];
+                        updatedPosts[postIndex].liked = !updatedPosts[postIndex].liked;
+                        updatedPosts[postIndex].likeCount += updatedPosts[postIndex].liked ? 1 : -1;
+                        setPosts(updatedPosts);
+                        setSelectedPost(updatedPosts[postIndex]);
+                      }}
+                    />
+                    <p>{selectedPost.likeCount} {selectedPost.likeCount <= 1 ? 'Like' : 'Likes'}</p>
                   </div>
+                  <button
+                    className="save-btn"
+                    onClick={() => handleSave(posts.findIndex(post => post.id === selectedPost.id))}
+                  >
+                    {savedIndex === posts.findIndex(post => post.id === selectedPost.id) ? 'Saved' : 'Save'}
+                  </button>
+                </div>
 
-                  {/* Add the line chart (skincare progress graph) here */}
+                {/* Display post comments */}
+                <h4>Comments</h4>
+                <ul>
+                  {selectedPost.comments.length > 0 ? (
+                    selectedPost.comments.map((comment, index) => (
+                      <li key={index}>
+                        <div className="comment-header">
+                          <img src={profile_img} alt="" className="post-profile-pict" />
+                          <strong>{comment.username}</strong>
+                        </div>
+                        <p>{comment.comment}</p>
+                      </li>
+                    ))
+                  ) : (
+                    <p>No comments yet.</p>
+                  )}
+                </ul>
+
+                <button className="back-post-btn" onClick={() => setVisibleSection('posts')}>Back to Posts</button>
               </div>
-          }
-
-          <h3 onClick={togglePredict} className="toggle-section">Predict</h3>
-          {isPredictOpen &&
-              <p>{predict}</p>
-          }
+            )}
         </div>
       </div>
-
-      {/* Rest of the component logic remains the same */}
-      <div className="activity-section">
-        <div className="navigation-buttons">
-          <button onClick={() => showSection('posts')}>Your Posts</button>
-          <button onClick={() => showSection('cart')}>Your Cart</button>
-          <button onClick={() => showSection('likedForums')}>Liked Forum</button>
-          <button onClick={() => showSection('savedForums')}>Saved Forum</button>
-        </div>
-
-        {visibleSection === 'posts' && (
-          <div className="activity-container" id="posts-section">
-            <h3>Your Posts</h3>
-            <ul>
-              {posts.map((post, index) => (
-                <li key={index} className="post-item">
-                  <div className="post-header">
-                    <img src={profile_img} alt="profile" className="post-profile-pict" />
-                    <h4>{post.username}</h4>
-                  </div>
-                  <p className="content-your-post">{post.content}</p>
-                  <div className="post-actions">
-                    <div className="liked-button">
-                      <IonIcon
-                        icon={heart}
-                        className={post.liked ? 'active' : ''}
-                        onClick={() => handleLike(index)}
-                      />
-                      <p>{post.likeCount} {post.likeCount <= 1 ? 'Like' : 'Likes'}</p>
-                    </div>
-                    <button className="save-btn" onClick={() => handleSave(index)}>
-                      {savedIndex === index ? 'Saved' : 'Save'}
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {visibleSection === 'cart' && (
-          <div className="activity-container" id="cart-section">
-            <h3>Your Cart</h3>
-            <ul>
-              {cartItems.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {visibleSection === 'likedForums' && (
-          <div className="activity-container" id="liked-forum-section">
-            <h3>Liked Forum</h3>
-            <ul>
-              {likedForums.map((forum, index) => (
-                <li key={index}>{forum}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {visibleSection === 'savedForums' && (
-          <div className="activity-container" id="saved-forum-section">
-            <h3>Saved Forum</h3>
-            <ul>
-              {savedForums.map((forum, index) => (
-                <li key={index}>{forum}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
-    <Footer/>
+      <Footer/>
     </div>
   );
-}
+};
 
 export default User;

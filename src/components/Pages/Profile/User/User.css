@@ -59,7 +59,7 @@
 .edit-profile-btn {
     padding: 10px 20px;
     background-color: #88CFF1;
-    color: white;
+    color: blacl;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
@@ -69,6 +69,7 @@
   
 .edit-profile-btn:hover {
     background-color: #224f64;
+    color: #fff;
 }
   
 .profile-details {
@@ -220,6 +221,7 @@
   cursor: pointer;
 }
 
+
 /* IonIcon for the heart button */
 ion-icon {
   fill: transparent;
@@ -240,6 +242,7 @@ ion-icon.active {
 .post-actions {
   display: flex;
   gap: 10px;
+  
 }
 
 .save-btn {
@@ -345,4 +348,62 @@ h1 {
 
 .schedule-container ul li:hover {
   color: #F3C2C2;
+}
+
+.full-post-container{
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.full-post-header{
+  display: flex;
+  align-items: center;
+}
+
+.full-post-container p{
+  padding-bottom: 20px;
+  /* border-bottom: 1px solid #ddd; */
+  margin-bottom: 10px;
+}
+
+.full-post-container li{
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 10px;
+  list-style: none;
+  align-items: center;
+}
+.comment-header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.back-post-btn{
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #88CFF1;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.back-post-btn:hover{
+  background-color:#224f64;
+  cursor: pointer;
+  color: #fff;
+}
+
+.post-action-full{
+  display: flex;
+  /* background-color: red; */
+  gap: 10px;
+  justify-content: right;
+  /* align-items: center; */
+}
+
+.post-action-full button{
+  height: 40px;
 }
