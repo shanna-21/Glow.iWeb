@@ -86,8 +86,8 @@ const Trending = ({ onSelectPost }) => {
     <div className="com-scroll">
       {posts.map((post, index) => (
         // <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
-        <div className="blocks" key={post.id} onClick={() => onSelectPost(post)}>
-          <div className="trend-post">
+        <div className="blocks">
+          <div className="trend-post" key={post.id} onClick={() => onSelectPost(post)}>
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
             <h5>{post.comments} comments</h5>
@@ -137,8 +137,8 @@ const TopForum = ({ onSelectPost }) => {
     <div className="com-scroll">
       {posts.map((post, index) => (
         // <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
-        <div className="blocks" key={post.id} onClick={() => onSelectPost(post)}>
-          <div className="trend-post">
+        <div className="blocks">
+          <div className="trend-post" key={post.id} onClick={() => onSelectPost(post)}>
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
             <h5>{post.comments} comments</h5>
@@ -187,8 +187,8 @@ const MostLiked = ({ onSelectPost }) => {
     <div className="com-scroll">
       {posts.map((post, index) => (
         // <div className="blocks" key={post.id} onClick={() => navigate(`/posts/${post.id}`)}>
-        <div className="blocks" key={post.id} onClick={() => onSelectPost(post)}>
-          <div className="trend-post">
+        <div className="blocks">
+          <div className="trend-post" key={post.id} onClick={() => onSelectPost(post)}>
             <h4><CgProfile /> {post.user}</h4>
             <p>{post.content}</p>
             <h5>{post.comments} comments</h5>
