@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-# /server/Dataset/
+/server/Dataset/
+/server/best_model.pth

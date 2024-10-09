@@ -67,11 +67,22 @@ from pathlib import Path
 
 # In[ ]:
 # Total Images
-IMAGE_PATH = Path("./server/Dataset")
+# IMAGE_PATH = Path("./server/Dataset")
 
-IMAGE_PATH_LIST = list(IMAGE_PATH.glob("*/*/*.jpg"))
+# IMAGE_PATH_LIST = list(IMAGE_PATH.glob("*/*/*.jpg"))
 
-print(f'Total Images = {len(IMAGE_PATH_LIST)}')
+# print(f'Total Images = {len(IMAGE_PATH_LIST)}')
+
+from pathlib import Path
+
+IMAGE_PATH = Path("./Dataset")
+print(f"Checking path: {IMAGE_PATH.resolve()}")  
+
+if not IMAGE_PATH.exists():
+    print(f"The directory '{IMAGE_PATH}' does not exist.")
+else:
+    IMAGE_PATH_LIST = list(IMAGE_PATH.glob("**/*.jpg"))
+    print(f'Total Images = {len(IMAGE_PATH_LIST)}')
 
 
 
@@ -232,6 +243,7 @@ valid_dataloader = DataLoader(dataset = valid_dataset,
 
 # In[ ]:
 
+train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=0)
 
 # Let's visualize the dimensions of a batch.
 batch_images, batch_labels = next(iter(train_dataloader))
@@ -441,7 +453,7 @@ def train(model:torch.nn.Module,
         
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
-            file_name = "best_model.pth"
+            file_name = "./best_model.pth"
             save_checkpoint(file_name, model, best_valid_loss, epoch, optimizer, valid_accuracy)
             
         print(f"Epoch: {epoch + 1} | ", 
@@ -462,6 +474,10 @@ def train(model:torch.nn.Module,
 
 
 # Training!!!
+
+train_dataloader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=0)
+valid_dataloader = DataLoader(valid_dataset, batch_size=32, shuffle=False, num_workers=0)
+
 EPOCHS = 100
 
 torch.cuda.manual_seed(SEED)
@@ -518,7 +534,7 @@ loss_metric_curve_plot(MODEL_RESULTS)
 
 
 # Let's load the best model.
-checkpoint_path = "/kaggle/working/best_model.pth"
+checkpoint_path = "./best_model.pth"
 checkpoint = torch.load(checkpoint_path)
 
 
@@ -545,6 +561,8 @@ test_dataloader = DataLoader(dataset = test_dataset, shuffle = False, num_worker
 
 # In[ ]:
 
+
+test_dataloader = DataLoader(test_dataset, batch_size=32, shuffle=False, num_workers=0)
 
 # We define the model again with its respective modification.
 loaded_model = vit_b_16()
@@ -612,3 +630,4 @@ sns.heatmap(confusion_matrix_test,
 ax.set_title("Confusion Matrix Test", fontsize = 10, fontweight = "bold", color = "darkblue")
 ax.tick_params('x',rotation = 90)
 fig.show()
+# %%
