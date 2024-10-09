@@ -13,7 +13,6 @@ const Home = () => {
     <div className="homecon">
         <Hero/>
         <About/>
-        {/* <Title subTitle="PROJECTS" title="Some Projects I did in My Leisure Time" /> */}
         <Tips/>
         <Title subTitle="RECOMMENDATION" title="What You Can Do" />
         <Recommendation/>
