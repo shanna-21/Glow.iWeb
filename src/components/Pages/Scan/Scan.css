@@ -1,0 +1,58 @@
+.upload-predict-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f9fc;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 50px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #224f64;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #88cff1;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 100%;
+  cursor: pointer;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #88cff1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #224f64;
+}
+
+.prediction-result {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.prediction-result h3 {
+  font-size: 20px;
+  color: #224f64;
+  margin-bottom: 10px;
+}
+
+.prediction-result p {
+  font-size: 16px;
+  color: #333;
+}
