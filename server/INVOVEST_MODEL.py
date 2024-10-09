@@ -60,18 +60,19 @@ from typing import Dict, List
 import warnings
 warnings.filterwarnings("ignore")
 
+# path
+from pathlib import Path
 
 # # **3. Load data and EDA**
 
 # In[ ]:
-
-
 # Total Images
-IMAGE_PATH = Path("/kaggle/input/skin-defects-acne-redness-and-bags-under-the-eyes/files")
+IMAGE_PATH = Path("./server/Dataset")
 
 IMAGE_PATH_LIST = list(IMAGE_PATH.glob("*/*/*.jpg"))
 
 print(f'Total Images = {len(IMAGE_PATH_LIST)}')
+
 
 
 # In[ ]:
@@ -611,4 +612,3 @@ sns.heatmap(confusion_matrix_test,
 ax.set_title("Confusion Matrix Test", fontsize = 10, fontweight = "bold", color = "darkblue")
 ax.tick_params('x',rotation = 90)
 fig.show()
-
