@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import "./Product-search.css";
 import ProductCard from "./Product-card";
 import "./Product-search.css";
 import imageProduct from "../../../assets/imageProducts.png";
+import useFetch from "../../../hooks/useFetch";
 
 const products = [
   {
@@ -227,6 +227,16 @@ const products = [
 
 function ProductSearch() {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const {data: productDatas, loading: courseLoading} = useFetch(
+    "http://localhost:3002/product/getProducts"
+  );
+
+  console.log(productDatas);
+
+  if (courseLoading) {
+    return <div></div>;
+  }
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);

@@ -3,6 +3,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import http from "http";
+// import { productRoutes } from '../Routes/productRoutes';
+import { productRoutes } from "./Routes/ProductRoutes.ts";
 
 const app = express();
 const port = 3002;
@@ -17,13 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser()); 
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+app.use('/product', productRoutes);
+// app.use("/product", productRoutes);
 
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log("Server running on port " + port); 
+    console.log("Server running on port " + port);
 });
