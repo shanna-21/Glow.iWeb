@@ -3,6 +3,8 @@ import {useParams, useNavigate} from "react-router-dom";
 import imageProduct from "../../../assets/imageProducts.png";
 import "./Product-Detail.css";
 import image2 from "./../../../assets/Foodmate.jpeg"
+import Hero from "./HeroProduct";
+
 const products = [
   {
     id: 1,
@@ -262,12 +264,16 @@ function ProductDetail() {
   };
 
   return (
+    <>
+   
     <div className="product-detail">
+    <Hero />
+      
+      <div className="product-info">
       <button onClick={handleBack} className="back-button">
         {" "}
         ← Back{" "}
       </button>
-      <div className="product-info">
         <div className="product-header-info">
           <div className="left-side-product-header">
             {isPic1 && <img
@@ -339,7 +345,9 @@ function ProductDetail() {
         )}
       </div>
     </div>
+    </>
   );
+  
 }
 
 export default ProductDetail;

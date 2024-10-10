@@ -3,7 +3,7 @@ import ProductCard from "./Product-card";
 import "./Product-search.css";
 import imageProduct from "../../../assets/imageProducts.png";
 import useFetch from "../../../hooks/useFetch";
-
+import Hero from "./HeroProduct";
 const products = [
   {
     id: 1,
@@ -249,7 +249,9 @@ function ProductSearch() {
   return (
     <>
       <div className="space-products">
+       
         <div className="product-search-container">
+        <Hero />
           <div className="search-container">
             <input
               type="text"
