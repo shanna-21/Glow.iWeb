@@ -2,9 +2,17 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.space-products {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 165vh;
+}
+
 .product-search-container {
   position: absolute;
-  top: 100px;
+  top: 400px;
   left: 200px;
 }
 
@@ -18,7 +26,7 @@ body {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 20px;
-  padding: 10px;
+  padding: 10px 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }

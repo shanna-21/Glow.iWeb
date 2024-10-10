@@ -4,8 +4,15 @@ body {
   padding: 0;
 }
 
+.hero-container-quiz-data {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 165vh;
+}
+
 .quiz-container {
-  margin-top: 30%;
+  margin-top: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +21,8 @@ body {
   min-height: 50vh;
   width: 100vh;
   background-color: #add8e6;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 20px;
   padding: 50px;
 }
@@ -115,14 +123,17 @@ body {
 
 .next-button {
   background-color: #91c3d6;
-  width: fit-content;
   scale: 150%;
+  font-weight: 700;
+  width: fit-content;
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
   border: #91c3d6;
   border-radius: 10%;
+  margin-right: 40px;
+  margin-bottom: 20px;
 }
 
 .back-button {
@@ -137,6 +148,7 @@ body {
   border: #91c3d6;
   border-radius: 10%;
   margin-right: 40px;
+
 }
 .container-bottom-form-quiz {
   padding-top: 15px;
@@ -157,4 +169,5 @@ body {
 .next-button:disabled {
   background-color: #dddddd;
   cursor: not-allowed;
+  
 }

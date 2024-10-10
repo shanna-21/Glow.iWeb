@@ -265,9 +265,12 @@ function ProductDetail() {
 
   return (
     <>
-   
-    <div className="product-detail">
+    <div className="hero-container-product-detail">
     <Hero />
+    </div>
+  
+    <div className="product-detail">
+    
       
       <div className="product-info">
       <button onClick={handleBack} className="back-button">

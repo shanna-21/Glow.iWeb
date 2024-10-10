@@ -2,6 +2,8 @@ import React from "react";
 import "./Products.css";
 import {useNavigate} from "react-router-dom";
 import mascot from "../../../assets/mascot-1.png";
+import Hero from "./HeroQuiz"
+
 const Products = () => {
   const navigate = useNavigate();
 
@@ -10,6 +12,9 @@ const Products = () => {
   };
   return (
     <div>
+      <div className="hero-container-take-quiz-first">
+        <Hero />
+      </div>
       <div className="container-form">
         <div className="content-form">
           <h1>Hi, Tiffany!</h1>

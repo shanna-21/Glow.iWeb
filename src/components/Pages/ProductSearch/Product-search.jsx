@@ -249,12 +249,12 @@ function ProductSearch() {
   return (
     <>
       <div className="space-products">
-       
-        <div className="product-search-container">
         <Hero />
+        <div className="product-search-container">
           <div className="search-container">
             <input
               type="text"
+              className="search-input"
               placeholder="Search Product"
               value={searchTerm}
               onChange={handleSearch}

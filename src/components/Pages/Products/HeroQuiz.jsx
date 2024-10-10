@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import "./HeroProduct.css";
+import "./HeroQuiz.css";
 
 const Hero = () => {
   const [text, setText] = useState("");
-  const message = ".Products";
+  const message = ".Take Quiz";
   const typingSpeed = 100;
 
   useEffect(() => {
