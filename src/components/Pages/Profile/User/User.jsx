@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { auth, db } from "../../../../../Backend/config"
+import { addDoc, collection, getDocs, query, orderBy, serverTimestamp} from "@firebase/firestore";
 import './User.css';
+import { useLocation } from "react-router-dom";
 import profile_img from '../../../../assets/profile-img.jfif';
 import { IonIcon } from '@ionic/react';
 import { heart } from 'ionicons/icons';
 import Footer from '../../../Footer/Footer';
 import Hero from '../Hero-profile/HeroProfile';
 import { Line } from 'react-chartjs-2';
+import { getAuth } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+
 import {
   Chart as ChartJS,
   LineElement,
@@ -81,78 +87,230 @@ const LineChart = () => {
 };
 
 const User = () => {
-  const [username] = useState("user123");
-  const [bio] = useState("This is a short bio about the user.");
-  const [posts, setPosts] = useState([
-    { 
-      id: 1,
-      username: "user123", 
-      content: "I started using a vitamin C serum, and my skin has never looked brighter! 🌟 #skincare", 
-      liked: false, 
-      likeCount: 5,
-      comments: [
-        { username: "commenter1", comment: "That's amazing! What brand are you using?" },
-        { username: "commenter2", comment: "I love vitamin C serums too!" },
-      ]
-    },
-    { id: 2, username: "user456", content: "Post 2 content here", liked: false, likeCount: 10, comments: [] },
-    { id: 3, username: "user789", content: "Post 3 content here", liked: false, likeCount: 0, comments: [] }
-  ]);
-  
-  const [savedIndex, setSavedIndex] = useState(null);
-  const [cartItems] = useState([]); // Initialize cartItems
-  const [visibleSection, setVisibleSection] = useState('posts'); // Default to 'posts'
-  const [selectedPost, setSelectedPost] = useState(null); // Track the selected post
 
-  // State to toggle the Journey, Routine, and Predict sections
-  const [isJourneyOpen, setJourneyOpen] = useState(false);
-  const [isRoutineOpen, setRoutineOpen] = useState(false);
-  const [isPredictOpen, setPredictOpen] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [savedIndex, setSavedIndex] = useState(null);
+    const [cartItems] = useState([]); // Initialize cartItems
+    const [visibleSection, setVisibleSection] = useState('posts');
+    const [selectedPost, setSelectedPost] = useState(null);
+    const [isJourneyOpen, setJourneyOpen] = useState(false);
+    const [isRoutineOpen, setRoutineOpen] = useState(false);
+    const [isPredictOpen, setPredictOpen] = useState(false);
+    const [commentText, setCommentText] = useState(''); 
+    const commentRef = useRef();
+    const auth = getAuth(); // Initialize Auth
+    const user = auth.currentUser; // Check the current user
+    const ref = collection(db, "comments");
 
-  const handleSave = (index) => {
-    setSavedIndex(savedIndex === index ? null : index);
-  };
+    const [userDetails, setUserDetails] = useState(null);
+    const fetchUserData = async () => {
+        auth.onAuthStateChanged(async (user) => {
+        console.log(user);
 
-  const handleLike = (index) => {
-    const updatedPosts = posts.map((post, i) =>
-      i === index ? { ...post, liked: !post.liked, likeCount: post.liked ? post.likeCount - 1 : post.likeCount + 1 } : post
-    );
-    setPosts(updatedPosts);
-  };
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            setUserDetails(docSnap.data());
+            console.log(docSnap.data());
+        } else {
+            console.log("User is not logged in");
+        }
+        });
+    };
+    useEffect(() => {
+        fetchUserData();
+    }, []);
 
-  const showSection = (section) => {
-    setVisibleSection(section);
-    setSelectedPost(null); // Reset selected post when navigating to another section
-  };
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const postsCollection = collection(db, "posts");
+                const q = query(postsCollection, orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                const postsData = querySnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }));
+                console.log("Fetched posts:", postsData);
+                setPosts(postsData);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+            }
+        };
+        fetchPosts();
+    }, []);
 
-  const showFullPost = (post) => {
-    setSelectedPost(post); // Set the clicked post as selected
-    setVisibleSection('fullPost'); // Switch to the full post view
-  };
+    const handleSave = (index) => {
+        setSavedIndex(savedIndex === index ? null : index);
+    };
 
-  const toggleJourney = () => {
-    setJourneyOpen(!isJourneyOpen);
-  };
+    const handleLike = async (index) => {
+        const post = posts[index];
+        const postRef = doc(db, "posts", post.id);
+    
+        const updatedPosts = posts.map((post, i) =>
+        i === index
+            ? { ...post, liked: !post.liked, likeCount: post.liked ? post.likeCount - 1 : post.likeCount + 1 }
+            : post
+        );
+        setPosts(updatedPosts);
+    
+        try {
+        await updateDoc(postRef, {
+            liked: !post.liked,
+            likeCount: post.liked ? post.likeCount - 1 : post.likeCount + 1,
+        });
+        } catch (error) {
+        console.error("Error updating likes: ", error);
+        }
+    };
+    
+    const handleAddComment = async (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+    
+        const commentText = commentRef.current.value; // Get the comment from the input
+    
+        if (!commentText) return; // Exit if the input is empty
+    
+        // Check if user is defined and has a username
+        console.log('Username:', user.username); // Debugging line
+    
+        const usernameToUse = userDetails.firstName || 'Anonymous'; // Default if username is undefined
+    
+        try {
+            console.log('Adding comment:', commentText);
+            console.log('Selected Post ID:', selectedPost.id);
+    
+            // Add the comment to the Firestore sub-collection
+            await addDoc(collection(db, 'posts', selectedPost.id, 'comments'), {
+                comment: commentText,
+                username: usernameToUse,
+                createdAt: serverTimestamp(),
+            });
+    
+            // Update local state to add the new comment to the selected post
+            setSelectedPost((prevPost) => ({
+                ...prevPost,
+                comments: [...(prevPost.comments || []), { comment: commentText, username: usernameToUse }],
+            }));
+              
+    
+            // Clear the input field
+            commentRef.current.value = '';
+        } catch (error) {
+            console.error("Error adding comment: ", error.message);
+            alert("Failed to add comment: " + error.message);
+        }
+    };
+    
+    
+    
+    
 
-  const toggleRoutine = () => {
-    setRoutineOpen(!isRoutineOpen);
-  };
+    const showSection = (section) => {
+        setVisibleSection(section);
+        setSelectedPost(null); // Reset selected post when navigating to another section
+    };
 
-  const togglePredict = () => {
-    setPredictOpen(!isPredictOpen);
-  };
+    const showFullPost = async(post) => {
+        setSelectedPost(post); // Set the clicked post as selected
+        setVisibleSection('fullPost'); // Switch to the full post view
+
+        try {
+            const commentsCollection = collection(db, 'posts', post.id, 'comments');
+            const q = query(commentsCollection, orderBy('createdAt', 'asc')); // Order comments by creation time
+            const querySnapshot = await getDocs(q);
+    
+            const commentsData = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+    
+            // Update selected post with fetched comments
+            setSelectedPost((prevPost) => ({
+                ...prevPost,
+                comments: commentsData,
+            }));
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    };
+
+    const toggleJourney = () => {
+        setJourneyOpen(!isJourneyOpen);
+    };
+
+    const toggleRoutine = () => {
+        setRoutineOpen(!isRoutineOpen);
+    };
+
+    const togglePredict = () => {
+        setPredictOpen(!isPredictOpen);
+    };
+
+    const handleLogout = async() => {
+        try {
+            await auth.signOut();
+            window.location.href = "/login";
+            console.log("User logged out successfully!");
+        } catch (error) {
+            console.error("Error logging out:", error.message);
+        }
+    }
+
+    const [content, setContent] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [like, setLike] = useState("")
+
+    const handleAddPost = async () => {
+        if (!content.trim()) {
+        alert("Post content cannot be empty!");
+        return;
+        }
+    
+        if (!user) {
+        alert("User not logged in!");
+        return;
+        }
+    
+        setLoading(true);
+        try {
+        await addDoc(collection(db, "posts"), {
+            username: user.displayName || userDetails.firstName,
+            content: content,
+            likeCount: 0,
+            liked: false,
+            createdAt: new Date(),
+        });
+        setContent(""); // Clear the input after submitting
+        alert("Post added successfully!");
+        } catch (error) {
+        console.error("Error adding post:", error);
+        alert("Failed to add post.");
+        } finally {
+        setLoading(false);
+        }
+    };
+    
+
 
   return (
     <div className="grand-user-container">
       <Hero/>
       <div className="profile-page-container">
         <div className="profile-section">
-          <div className="profile-header">
-            <img src={profile_img} className="profile-pict" alt="profile"/>
-            <h2 className="profile-username">{username}</h2>
-            <p className="profile-bio">{bio}</p>
-            <button className="edit-profile-btn">Edit Profile</button>
-          </div>
+            {userDetails ? (
+                <div className="profile-header">
+                    <img src={profile_img} className="profile-pict" alt="profile" />
+                    <h2 className="profile-username">{userDetails.firstName}</h2>
+                    <p className="profile-bio">{userDetails.email}</p>
+                    <button className="btn-logout" onClick={handleLogout}>
+                        Logout
+                    </button>
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
 
           {/* Add the Journey, Routine, and Predict sections here */}
           <div className="profile-details">
@@ -272,36 +430,44 @@ const User = () => {
           {visibleSection === 'posts' && (
             <div className="activity-container" id="posts-section">
               <h3>Your Posts</h3>
-              <ul>
-                {posts.map((post, index) => (
-                  <li key={index} className="post-item" onClick={() => showFullPost(post)}>
-                    <div className="post-header">
-                      <img src={profile_img} alt="profile" className="post-profile-pict" />
-                      <h4>{post.username}</h4>
-                    </div>
-                    <p className="content-your-post">{post.content}</p>
-                    <div className="post-actions">
-                      <div className="liked-button" onClick={(e) => e.stopPropagation() /* Prevent event propagation */}>
-                        <IonIcon
-                          icon={heart}
-                          className={post.liked ? 'active' : ''}
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent event propagation to parent
-                            handleLike(index);
-                          }}
-                        />
-                        <p>{post.likeCount} {post.likeCount <= 1 ? 'Like' : 'Likes'}</p>
-                      </div>
-                      <button className="save-btn" onClick={(e) => {
-                        e.stopPropagation(); // Prevent event propagation to parent
-                        handleSave(index);
-                      }}>
-                        {savedIndex === index ? 'Saved' : 'Save'}
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <div className="add-post-container">
+                    <textarea
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder="Write something..."
+                    />
+                    <button onClick={handleAddPost} disabled={loading}>
+                        {loading ? "Posting..." : "Post"}
+                    </button>
+                </div>
+                <h2>{posts.length} Post{posts.length !== 1 ? 's' : ''}</h2>
+                <ul>
+                    {posts.map((post, index) => (
+                        <li key={post.id} className="post-item" onClick={() => showFullPost(post)}>
+                        <div className="post-header">
+                            <img src={profile_img} alt="profile" className="post-profile-pict" />
+                            <h4>{post.username}</h4>
+                        </div>
+                        <p className="content-your-post">{post.content}</p>
+                        <div className="post-actions">
+                            <div className="liked-button">
+                            <IonIcon
+                                icon={heart}
+                                className={post.liked ? "active" : ""}
+                                onClick={() => handleLike(index)}
+                            />
+                            <p>{post.likeCount} {post.likeCount === 1 ? 'Like' : 'Likes'}</p>
+                            </div>
+                            <button
+                            className="save-btn"
+                            onClick={() => handleSave(index)}
+                            >
+                            {savedIndex === index ? 'Saved' : 'Save'}
+                            </button>
+                        </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
           )}
 
@@ -341,20 +507,27 @@ const User = () => {
                 {/* Display post comments */}
                 <h4>Comments</h4>
                 <ul>
-                  {selectedPost.comments.length > 0 ? (
+                {selectedPost.comments && selectedPost.comments.length > 0 ? (
                     selectedPost.comments.map((comment, index) => (
-                      <li key={index}>
-                        <div className="comment-header">
-                          <img src={profile_img} alt="" className="post-profile-pict" />
-                          <strong>{comment.username}</strong>
-                        </div>
-                        <p>{comment.comment}</p>
-                      </li>
+                        <li key={index}>
+                            <div className="comment-header">
+                                <img src={profile_img} alt="" className="post-profile-pict" />
+                                <strong>{comment.username}</strong>
+                            </div>
+                            <p>{comment.comment}</p>
+                        </li>
                     ))
-                  ) : (
+                ) : (
                     <p>No comments yet.</p>
-                  )}
+                )}
                 </ul>
+
+                <div className="add-comment-section">
+                    <form onSubmit={handleAddComment}>
+                        <input type="text" ref={commentRef} placeholder="Write a comment..." required />
+                        <button type="submit">Post</button>
+                    </form>
+                </div>
 
                 <button className="back-post-btn" onClick={() => setVisibleSection('posts')}>Back to Posts</button>
               </div>

@@ -56,7 +56,7 @@
     margin-bottom: 15px;
 }
   
-.edit-profile-btn {
+.btn-logout {
     padding: 10px 20px;
     background-color: #88CFF1;
     color: blacl;
@@ -67,7 +67,7 @@
     transition: background-color 0.3s ease;
 }
   
-.edit-profile-btn:hover {
+.btn-logout:hover {
     background-color: #224f64;
     color: #fff;
 }
@@ -406,4 +406,68 @@ h1 {
 
 .post-action-full button{
   height: 40px;
+}
+
+.add-comment-section{
+  padding: 10px;
+  
+  /* background-color: red; */
+}
+
+.add-comment-section input{
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  
+}
+
+.add-comment-section button{
+  padding: 8px;
+  border-radius: 10px;
+  border-style: none;
+  background-color: #88CFF1;
+  /* background-color: red; */
+}
+
+.add-comment-section button:hover{
+  padding: 8px;
+  border-radius: 10px;
+  border-style: none;
+  background-color: #4b7386;
+  cursor: pointer;
+  /* background-color: red; */
+}
+.add-post-container{
+  align-items: center;
+  display: flex;
+  margin: 20px;
+  /* justify-content: center; */
+  /* background-color: red; */
+}
+
+.add-post-container textarea{
+  padding: 10px;
+  border-radius: 10px;
+  width: 500px;
+  
+}
+
+.add-post-container button{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #88CFF1;
+  margin-top: 10px;
+}
+
+.add-post-container button:hover{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #517f94;
+  margin-top: 10px;
+  color: white;
+  cursor: pointer;
 }
