@@ -17,6 +17,8 @@ import ProductDetail from "./components/Pages/ProductSearch/Product-Detail.jsx";
 import News from "./components/Pages/News/News.jsx";
 import NewsPage from "./components/Pages/News/NewsPage/NewsPage.jsx";
 import Authentication from "./components/Pages/login/firstPage.jsx";
+import Landingpage from "./components/Pages/NoAuth/NoAuth.jsx"
+import Login from "./components//Pages/login/login.jsx"
 
 const App = () => {
   const location = useLocation();
@@ -33,8 +35,9 @@ const App = () => {
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/products-search" element={<ProductSearch />} />
         <Route path="/article/:id" element={<NewsPage />} />
-        <Route path="/product/:productId" element={<ProductDetail />} />
-        <Route path="/" element={<Authentication />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/" element={<Landingpage />} />
+        <Route path="/login" element={<Authentication/>}/>
         <Route path="/news" element={<News />} />
       </Routes>
 

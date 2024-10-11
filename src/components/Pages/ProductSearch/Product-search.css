@@ -7,7 +7,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  width: 180vh;
+  width: 100%;
 }
 
 .product-search-container {
@@ -36,7 +36,7 @@ body {
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 20px;
   padding: 50px;
-  background-color: #e4e9eb;
+  background-color: rgb(255, 255, 255);
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3, minmax(100px, 1fr));

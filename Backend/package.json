@@ -1,7 +1,7 @@
 {
     "type": "module",
     "scripts": {
-        "dev": "nodemon --exec ts-node index.js",
+    "dev": "nodemon --exec ts-node index.js",
         "start": "nodemon --watch './**/*.ts' --exec 'ts-node' index.js"
     },
     "dependencies": {

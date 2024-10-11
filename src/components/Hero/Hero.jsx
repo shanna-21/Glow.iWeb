@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './Hero.css'
 // import arrow from '../../assets/arrow.png'
 // import mail from '../../assets/email-icon.png'
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const [text, setText] = useState('')
@@ -29,11 +30,12 @@ const Hero = () => {
           Let's scan your face!
         </p>
 
-        {/* ini nanti button nya button buat ke scan (?) */}
-        <button onClick={() => window.location.href='mailto:shanna.fernlie@gmail.com?subject=Hello&body=I%20wanted%20to%20reach%20out.'} className='btn'>
-          Scan Face 
-          {/* <img className='email' src={mail} alt="arrow" /> */}
-        </button>
+        <Link to={'/scan'}>
+          <button onClick={'/scan'} className='btn'>
+            Scan Face 
+          </button>
+        </Link>
+        
       </div>
     </div>
   )

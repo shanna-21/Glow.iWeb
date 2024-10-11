@@ -10,9 +10,17 @@ const Authentication = () => {
     setIsLogin((prevState) => !prevState);
   };
 
+  const switchToLogin = () => {
+    setIsLogin(true); // Set the state to true to show the login form
+  };
+
   return (
     <div className="auth-wrapper">
-      {isLogin ? <LoginPage toggleForm={toggleForm} /> : <SignUpPage toggleForm={toggleForm} />}
+      {isLogin ? (
+        <LoginPage toggleForm={toggleForm} />
+      ) : (
+        <SignUpPage toggleForm={toggleForm} switchToLogin={switchToLogin} />
+      )}
     </div>
   );
 };

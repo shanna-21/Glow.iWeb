@@ -1,0 +1,91 @@
+.programs{
+    margin: 80px auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.program img{
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+.program{
+    flex-basis: 17%;
+    position: relative;
+}
+
+.caption{
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,15,152,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    padding-top: 75%;
+    transition: 0.4s;
+}
+
+.program:hover .caption{
+    opacity: 1;
+    /* transition: ; */
+    padding-top: 0;
+}
+
+/* Recommendation.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding-top: 43px;
+    padding-left: 80px;
+    border-radius: 8px;
+    width: 500px;
+    height: 400px;
+    max-width: 80%;
+    position: relative;
+    color: #313E65;
+}
+
+.modal-content h4{
+    margin-left: -25px;
+    margin-bottom: -5px;
+    font-weight: 450;
+}
+
+.modal-content h2{
+    margin-left: -25px;
+    margin-bottom: 10px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #F3C2C2;
+}
