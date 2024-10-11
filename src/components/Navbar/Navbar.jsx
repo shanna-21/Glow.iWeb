@@ -26,7 +26,7 @@ useEffect(()=>{
     <nav className={`container ${sticky? 'dark-nav' : 'light-nav'}`}>
         <img src={logo} alt="" className='logo'/>
         <ul>
-            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/home'>Home</Link></li>
             <li><Link to='/take-quiz'>Quiz</Link></li>
             <li><Link to='/products-search'>Products</Link></li>
             <li><Link to='/community'>Community</Link></li>
