@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "@firebase/firestore";
 import { getStorage } from "firebase/storage";
-import "dotenv/config";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBrLdV7K9-cIidQTkcQgjBScknxtMKh-Ec",
@@ -10,7 +9,7 @@ const firebaseConfig = {
   storageBucket: "glowi-4d056.appspot.com",
   messagingSenderId: "566613838757",
   appId: "1:566613838757:web:e1ad6ec2b1dc3e7614364c",
-  measurementId: "G-47FJH92THE"
+  measurementId: "G-47FJH92THE",
 };
 
 const fireApp = initializeApp(firebaseConfig);

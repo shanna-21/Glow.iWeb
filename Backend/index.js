@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import http from "http";
 // import { productRoutes } from '../Routes/productRoutes';
-import { productRoutes } from "./Routes/ProductRoutes.ts";
+import { productRoutes } from "./Routes/productRoutes.js";
 
 const app = express();
 const port = 3002;
