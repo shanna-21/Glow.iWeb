@@ -1,5 +1,5 @@
 import express from "express";
-
+import {getDocs, collection, query, where} from "firebase/firestore";
 import admin from "firebase-admin";
 import serviceAccount from "../../glowi-4d056-firebase-adminsdk-yknz3-8438c6d8a7.json" assert {type: "json"};
 admin.initializeApp({
@@ -26,6 +26,22 @@ export class ProductControllers {
       res
         .status(500)
         .json({error: "Error fetching products", details: error.message});
+    }
+  }
+  static async getProductById(req, res) {
+    try {
+      const productId = req.params.id;
+      const productsRef = db.collection("products");
+      const q = productsRef.where("id", "==", productId);
+      const querySnapshot = await q.get();
+      if (!querySnapshot.empty) {
+        const product = querySnapshot.docs[0].data();
+        res.status(200).json(product);
+      } else {
+        res.status(404).json({error: "Product not found"});
+      }
+    } catch (error) {
+      res.status(500).json({error: "Error fetching product"});
     }
   }
 }

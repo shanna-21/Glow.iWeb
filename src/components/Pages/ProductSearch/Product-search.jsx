@@ -7,14 +7,12 @@ import Hero from "./HeroProduct";
 function ProductSearch() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetching the product data from the server
   const {
     data: productDatas,
-    loading: courseLoading,
+    loading: productLoading,
     error,
   } = useFetch("http://localhost:3002/product/getProduct");
 
-  // Fallback data in case fetching fails
   const fallbackProducts = [
     {
       id: "97TQWKADv7d7wdWPM7bM",
@@ -34,7 +32,6 @@ function ProductSearch() {
         "Marine Collagen",
       ],
     },
-    // Add other products as fallback
   ];
 
   const products = productDatas?.length ? productDatas : fallbackProducts;
@@ -45,13 +42,13 @@ function ProductSearch() {
 
   const mappedProducts = products.map((product) => ({
     id: product.id,
-    image: product.image1, // Use the first image as the primary one
+    image: product.image1,
     name: product.name,
     sold: product.sold,
     price: product.price,
   }));
 
-  if (courseLoading) {
+  if (productLoading) {
     return <div>Loading...</div>;
   }
 
