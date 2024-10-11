@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import './Hero.css'
-// import arrow from '../../assets/arrow.png'
-// import mail from '../../assets/email-icon.png'
+import Scan from '../Scan/Scan'
 
 const Hero = () => {
-  const [text, setText] = useState('')
+  const [text, setText] = useState('');
+  const [showScan, setShowScan] = useState(false);
   const message = ".Better Skin, Better You";
   const typingSpeed = 100;
 
@@ -21,23 +21,24 @@ const Hero = () => {
 
   return (
     <div className="hero container">
-      <div className="hero-text">
-        <h1>{text}</h1>
-        <p> 
-          Welcome to glow.i!
-          Here, your skincare journey starts.
-          Let's scan your face!
-        </p>
-
-        {/* ini nanti button nya button buat ke scan (?) */}
-        <button onClick={() => window.location.href='mailto:shanna.fernlie@gmail.com?subject=Hello&body=I%20wanted%20to%20reach%20out.'} className='btn'>
-          Scan Face 
-          {/* <img className='email' src={mail} alt="arrow" /> */}
-        </button>
-      </div>
+      {showScan ? (
+        <Scan /> // Display Scan component when showScan is true
+      ) : (
+        <div className="hero-text">
+          <h1>{text}</h1>
+          <p>
+            Welcome to glow.i! <br />
+            Here, your skincare journey starts. <br />
+            Let's scan your face!
+          </p>
+          <button onClick={() => setShowScan(true)} className="btn">
+            Scan Face
+          </button>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 
 export default Hero
