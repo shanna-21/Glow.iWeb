@@ -1,32 +1,31 @@
-import express from "express"; // Import express as default
-import {
-  collection,
-  getDocs,
-  addDoc,
-  doc,
-  query,
-  where,
-  deleteDoc,
-  getDoc,
-  updateDoc,
-  arrayUnion,
-} from "firebase/firestore";
-import { storages, db } from "../config.js"; // Ensure the path is correct
-const { Request, Response } = express; // Destructure Request and Response from express
+import express from "express";
 
-const productsCollection = collection(db, "products");
+import admin from "firebase-admin";
+import serviceAccount from "../../glowi-4d056-firebase-adminsdk-yknz3-8438c6d8a7.json" assert {type: "json"};
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
+const db = admin.firestore();
+
+console.log(db);
 export class ProductControllers {
-  static async getProducts(req = Request, res = Response) { // Use req and res as parameters
+  static async getProducts(req, res) {
     try {
-      const productSnapshot = await getDocs(productsCollection);
+      const productsCollection = db.collection("products");
+      const productSnapshot = await productsCollection.get();
+
       const products = productSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+
       res.status(200).json(products);
     } catch (error) {
-      res.status(500).json({ error: "Error fetching products" });
+      console.error("Error fetching products:", error);
+      res
+        .status(500)
+        .json({error: "Error fetching products", details: error.message});
     }
   }
 }

@@ -229,7 +229,7 @@ function ProductSearch() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const {data: productDatas, loading: courseLoading} = useFetch(
-    "http://localhost:3002/product/getProducts"
+    "http://localhost:3002/product/getProduct"
   );
 
   console.log(productDatas);
