@@ -44,4 +44,37 @@ export class ProductControllers {
       res.status(500).json({error: "Error fetching product"});
     }
   }
+  static async getProductReviews(req, res) {
+    try {
+      const productId = req.params.id;
+      const productsRef = db.collection("products");
+      const querySnapshot = await productsRef
+        .where("id", "==", productId)
+        .get();
+
+      if (querySnapshot.empty) {
+        return res.status(404).json({error: "Product not found."});
+      }
+
+      const productDoc = querySnapshot.docs[0].ref;
+      const reviewsSnapshot = await productDoc.collection("reviews").get();
+
+      if (reviewsSnapshot.empty) {
+        return res
+          .status(404)
+          .json({error: "No reviews found for this product."});
+      }
+
+      const reviews = reviewsSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      res.status(200).json(reviews);
+    } catch (error) {
+      res
+        .status(500)
+        .json({error: "Error fetching reviews", details: error.message});
+    }
+  }
 }
