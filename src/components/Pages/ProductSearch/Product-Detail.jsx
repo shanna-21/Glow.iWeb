@@ -70,7 +70,7 @@ function ProductDetail() {
             <div className="left-side-product-header">
               {isPic1 && (
                 <img
-                  src={product.image}
+                  src={product.image1}
                   alt={product.name}
                   className="product-image"
                 />
@@ -84,7 +84,7 @@ function ProductDetail() {
               )}
               <div className="product-header-container-image">
                 <img
-                  src={product.image}
+                  src={product.image1}
                   alt={product.name}
                   className="product-image"
                   onClick={handlepic1}
