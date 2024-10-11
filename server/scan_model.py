@@ -483,12 +483,114 @@ EPOCHS = 100
 torch.cuda.manual_seed(SEED)
 torch.manual_seed(SEED)
 
-MODEL_RESULTS = train(model.to(device), 
-                      train_dataloader, 
-                      valid_dataloader, 
-                      loss_fn, 
-                      optimizer, 
-                      EPOCHS)
+
+import torch
+
+train_losses = []
+valid_losses = []
+valid_metrics = []
+
+# Assuming you have a trained model, optimizer, loss function, dataloaders
+epochs = 50  # Example number of epochs
+
+def train(model, train_dataloader, valid_dataloader, loss_fn, optimizer, epochs):
+    best_loss = float('inf')  # Initialize best loss as infinity
+    best_metric = 0.0  # Initialize best metric (like accuracy) as 0 if higher is better
+    MODEL_RESULTS = {
+        "train_loss": [],
+        "valid_loss": [],
+        "train_accuracy": [],
+        "valid_accuracy": []
+    }
+
+    for epoch in range(epochs):
+        model.train()  # Set the model to training mode
+        epoch_train_loss = 0.0
+        model.train()
+        correct_train = 0
+        total_train = 0
+        
+        # Training loop
+        for batch in train_dataloader:
+            inputs, labels = batch
+            inputs, labels = inputs.to(device), labels.to(device)
+            
+            optimizer.zero_grad()  # Clear gradients
+            outputs = model(inputs)  # Forward pass
+            loss = loss_fn(outputs, labels)  # Compute loss
+            loss.backward()  # Backward pass
+            optimizer.step()  # Update model weights
+            
+            loss = loss_fn(outputs, labels)
+            epoch_train_loss += loss.item()
+            preds = outputs.argmax(dim=1)
+            correct_train += (preds == labels).sum().item()
+            total_train += labels.size(0)
+            
+            epoch_train_loss += loss.item()  # Sum training loss
+        
+        epoch_train_loss /= len(train_dataloader)  # Average training loss
+        train_losses.append(epoch_train_loss)  # Store train loss for this epoch
+        train_accuracy = correct_train / total_train
+        
+        # Validation loop
+        model.eval()  # Set the model to evaluation mode
+        epoch_valid_loss = 0.0
+        epoch_valid_metric = 0.0
+        correct_valid = 0
+        total_valid = 0
+        
+        with torch.no_grad():  # No need to calculate gradients during validation
+            for batch in valid_dataloader:
+                inputs, labels = batch
+                inputs, labels = inputs.to(device), labels.to(device)
+                
+                outputs = model(inputs)  # Forward pass
+                loss = loss_fn(outputs, labels)  # Compute loss
+                epoch_valid_loss += loss.item()  # Sum validation loss
+                
+                # Calculate accuracy/metric (optional, depends on your task)
+                # Example: accuracy = (predicted_labels == actual_labels).sum().item() / len(labels)
+                # validation_metric += accuracy
+                
+                loss = loss_fn(outputs, labels)
+                epoch_valid_loss += loss.item()
+                preds = outputs.argmax(dim=1)
+                correct_valid += (preds == labels).sum().item()
+                total_valid += labels.size(0)
+        
+        epoch_valid_loss /= len(valid_dataloader)  # Average validation loss
+        valid_losses.append(epoch_valid_loss)  # Store validation loss
+        valid_accuracy = correct_valid / total_valid
+        
+        # Optionally store validation metric
+        valid_metrics.append(epoch_valid_metric)
+        
+        MODEL_RESULTS["train_loss"].append(epoch_train_loss)
+        MODEL_RESULTS["valid_loss"].append(epoch_valid_loss)
+        MODEL_RESULTS["train_accuracy"].append(train_accuracy)
+        MODEL_RESULTS["valid_accuracy"].append(valid_accuracy)
+        
+        # Save model if validation loss improves
+        if epoch_valid_loss < best_loss:
+            best_loss = epoch_valid_loss
+            checkpoint = {
+                'epoch': epoch,  # Save the current epoch
+                'model_state_dict': model.state_dict(),  # Save model weights
+                'optimizer_state_dict': optimizer.state_dict(),  # Save optimizer state
+                'loss': best_loss,  # Save the best loss
+                'metric': epoch_valid_metric  # Optionally save the best metric
+            }
+            torch.save(checkpoint, 'best_model.pth')  # Save best model weights
+            print(f"Best model saved at epoch {epoch} with loss {best_loss}")
+        
+        # Optionally save model if metric improves
+        if epoch_valid_metric > best_metric:
+            best_metric = epoch_valid_metric
+            torch.save(model.state_dict(), 'best_model_metric.pth')  # Save best metric model
+            print(f"Best model saved at epoch {epoch} with metric {best_metric}")
+            
+    return MODEL_RESULTS
 
 
 # In[ ]:
@@ -526,7 +628,14 @@ def loss_metric_curve_plot(model_results:Dict[str,List[float]]):
 
 # In[ ]:
 
+MODEL_RESULTS = train(model.to(device), 
+                      train_dataloader, 
+                      valid_dataloader, 
+                      loss_fn, 
+                      optimizer, 
+                      EPOCHS)
 
+print(f'Model Results: {MODEL_RESULTS}')
 loss_metric_curve_plot(MODEL_RESULTS)
 
 
@@ -536,7 +645,7 @@ loss_metric_curve_plot(MODEL_RESULTS)
 # Let's load the best model.
 checkpoint_path = "./best_model.pth"
 checkpoint = torch.load(checkpoint_path)
-
+print(checkpoint)
 
 # In[ ]:
 
@@ -570,7 +679,7 @@ loaded_model = vit_b_16()
 loaded_model.heads = nn.Sequential(OrderedDict([('head',nn.Linear(in_features = 768, 
                                                                   out_features = output_shape))]))
 
-loaded_model.load_state_dict(checkpoint["model"])
+loaded_model.load_state_dict(checkpoint["model_state_dict"])
 
 # We now infer
 loaded_model.to(device)
@@ -630,4 +739,49 @@ sns.heatmap(confusion_matrix_test,
 ax.set_title("Confusion Matrix Test", fontsize = 10, fontweight = "bold", color = "darkblue")
 ax.tick_params('x',rotation = 90)
 fig.show()
+
+
+# %%
+
+# training.py
+# import torch
+
+# def load_model(model_path):
+#     model = torch.load(model_path)
+#     model.eval()  # Set the model to evaluation mode
+#     return model
+
+# %%
+
+import torch
+from torchvision import transforms
+from torchvision.models import vit_b_16  # Import the Vision Transformer
+from PIL import Image
+
+# Load the model architecture and weights
+model = vit_b_16(weights=None)  # Initialize the ViT model
+model.load_state_dict(torch.load('best_model.pth'), strict=False)  # Load the trained weights
+model.eval()  # Set the model to evaluation mode
+
+# Define the transformation for input images
+preprocess = transforms.Compose([
+    transforms.Resize((224, 224)),  # Adjust this based on your model's expected input size
+    transforms.ToTensor(),
+    # Add any other necessary transformations, like normalization
+])
+
+def IAmPredicting(image_path):
+    image = Image.open(image_path)
+    image = preprocess(image)
+    image = image.unsqueeze(0)  # Add batch dimension
+    
+    with torch.no_grad():
+        output = model(image)
+        _, predicted = torch.max(output, 1)  # Get the class with the highest score
+    
+    return predicted.item()  # Return the predicted class index
+
+# %%
+
+
 # %%

@@ -5,7 +5,8 @@ import './Hero.css'
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
-  const [text, setText] = useState('')
+  const [text, setText] = useState('');
+  const [showScan, setShowScan] = useState(false);
   const message = ".Better Skin, Better You";
   const typingSpeed = 100;
 
@@ -38,8 +39,8 @@ const Hero = () => {
         
       </div>
     </div>
-  )
-}
+  );
+};
 
 
 export default Hero

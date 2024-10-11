@@ -17,7 +17,12 @@ h2 {
   color: #224f64;
 }
 
-input[type="file"] {
+/* input[type="file"] {
+  background: none;
+  border: none;
+}
+
+.upload-file{
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #88cff1;
@@ -25,6 +30,28 @@ input[type="file"] {
   background-color: #fff;
   width: 100%;
   cursor: pointer;
+} */
+
+input[type="file"] {
+  opacity: 0; 
+  position: absolute;
+}
+
+.upload-file {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #88cff1;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 100%;
+  text-align: center;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
+  color: #224f64;
+  border-radius: 5px;
 }
 
 button {
@@ -39,6 +66,12 @@ button {
 
 button:hover {
   background-color: #224f64;
+}
+
+.upload-description {
+  color: #313E65;
+  max-width: 300px;
+  margin-bottom: 20px;
 }
 
 .prediction-result {
