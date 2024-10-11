@@ -12,8 +12,14 @@ function ProductDetail() {
   const {
     data: productDatas,
     loading: productLoading,
-    error,
+    errorProduct,
   } = useFetch(`http://localhost:3002/product/getProductById/${productId}`);
+
+  const {
+    data: reviewDatas,
+    loading: reviewLoading,
+    errorReview,
+  } = useFetch(`http://localhost:3002/product/getProductReviews/${productId}`);
   console.log(productDatas);
   const product = productDatas;
   const navigate = useNavigate();
@@ -26,11 +32,15 @@ function ProductDetail() {
   if (!product) {
     return <h2>Product not found</h2>;
   }
-  if (productLoading) {
+  if (productLoading || reviewLoading) {
     return <div>Loading...</div>;
   }
-  if (error) {
-    console.error("Error fetching product data:", error);
+  if (errorProduct) {
+    console.error("Error fetching product data:", errorProduct);
+    return <div>Error fetching data</div>;
+  }
+  if (errorReview) {
+    console.error("Error fetching product data:", errorReview);
     return <div>Error fetching data</div>;
   }
   const handleBack = () => {
@@ -124,8 +134,8 @@ function ProductDetail() {
           {isReviewsOpen && (
             <div className="product-reviews">
               <h3>Reviews</h3>
-              {product.reviews.length > 0 ? (
-                product.reviews.map((review, index) => (
+              {reviewDatas.length > 0 ? (
+                reviewDatas.map((review, index) => (
                   <div key={index} className="review-item">
                     <p>
                       <strong>{review.user}</strong>
