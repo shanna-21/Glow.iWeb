@@ -125,11 +125,14 @@ CORS(app)  # Enable CORS for all routes
 @app.route('/predict', methods=['POST'])
 def predict_skin_disease():
     try:
+        if 'images' not in request.files:
+            return jsonify({'error': 'No images provided'}), 400
+        
         files = request.files.getlist('image')
         if len(files) != 3:
             return jsonify({'error': 'Please upload exactly 3 images'}), 400
 
-        save_dir = '/images/'  # Change this to an appropriate directory path
+        save_dir = './images/'  # Change this to an appropriate directory path
         os.makedirs(save_dir, exist_ok=True)  # Create the directory if it doesn't exist
         predictions = []
         

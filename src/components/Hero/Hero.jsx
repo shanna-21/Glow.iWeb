@@ -28,8 +28,8 @@ const Hero = () => {
         <p> 
           Welcome to glow.i!
           Here, your skincare journey starts.
-          Let's scan your face!
         </p>
+        <p>Let's scan your face!</p>
 
         <Link to={'/scan'}>
           <button onClick={'/scan'} className='btn'>
