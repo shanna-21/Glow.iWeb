@@ -65,6 +65,14 @@ function ProductDetail() {
     setIsPic2(!isPPic2);
   };
 
+  const renderStars = () => {
+    return "⭐️".repeat(product.rating);
+  };
+
+  const renderStarsReview = ({review}) => {
+    return "⭐️".repeat(review.rating);
+  };
+
   return (
     <>
       <div className="hero-container-product-detail">
@@ -111,7 +119,9 @@ function ProductDetail() {
               <h2>{product.name}</h2>
               <p>Price: {product.price}</p>
               <p>{product.sold}</p>
-              <p>Rating: {product.rating} stars</p>
+              <p>
+                Rating:<span>{renderStars()}</span>{" "}
+              </p>
             </div>
           </div>
 
@@ -127,10 +137,19 @@ function ProductDetail() {
           {isIngredientsOpen && (
             <div className="product-ingredients">
               <h3>Ingredients</h3>
-              <p>{product.ingredients}</p>
+              <ul className="ingredients-list">
+                {product.ingredients && product.ingredients.length > 0 ? (
+                  product.ingredients.map((ingredient, index) => (
+                    <li className="ingredients-key" key={index}>
+                      {ingredient}
+                    </li>
+                  ))
+                ) : (
+                  <p>No ingredients available.</p>
+                )}
+              </ul>
             </div>
           )}
-
           {isReviewsOpen && (
             <div className="product-reviews">
               <h3>Reviews</h3>
@@ -140,7 +159,9 @@ function ProductDetail() {
                     <p>
                       <strong>{review.user}</strong>
                     </p>
-                    <p>Rating: {review.rating} stars</p>
+                    <p>
+                      Rating:<span>{renderStars()}</span>
+                    </p>
                     <p>{review.review}</p>
                   </div>
                 ))
