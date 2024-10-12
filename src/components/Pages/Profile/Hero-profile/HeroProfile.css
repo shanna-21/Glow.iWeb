@@ -2,7 +2,7 @@
     width: 100%;
     /* background-color: red; */
     min-height: 50vh;
-    background: linear-gradient(rgba(94, 182, 241, 0.7),rgba(33, 63, 109, 0.7)), url('../../../../assets/derma.jpg');
+    background: linear-gradient(rgba(94, 182, 241, 0.7),rgba(33, 63, 109, 0.7)), url('../../../../assets/header-hero.avif');
     background-size: cover;
     background-position: center;
     color: #fff;
