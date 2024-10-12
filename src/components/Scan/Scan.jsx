@@ -201,6 +201,37 @@ const Scan = () => {
         }
     };
 
+    const findMajorityPrediction = (predictions) => {
+        if (predictions.length === 0) return null;
+        
+        const counts = {};
+        let majorityPrediction = predictions[0];
+        let maxCount = 0;
+
+        // Count occurrences of each prediction
+        predictions.forEach((prediction) => {
+            counts[prediction] = (counts[prediction] || 0) + 1;
+            if (counts[prediction] > maxCount) {
+                maxCount = counts[prediction];
+                majorityPrediction = prediction;
+            }
+        });
+
+        return majorityPrediction;
+    };
+
+    const translatePrediction = (majorityPrediction) => {
+        if (majorityPrediction === 0) {
+            return "acne";
+        } else if (majorityPrediction === 1) {
+            return "eyebags";
+        } else if (majorityPrediction === 2) {
+            return "redness";
+        } else {
+            return "Unknown";
+        }
+    };
+
     return (
         <div className='background-scan'>
             <div className='upload-predict-container'>
@@ -212,27 +243,37 @@ const Scan = () => {
                 <input id="file-upload" type="file" multiple onChange={handleImageChange} />
                 </div>
 
-            {uploadComplete && (
-                <p className='upload-description'>{uploadCompleteText}</p>
-            )}
-
-            {/* <input type="file" multiple onChange={handleImageChange} /> */}
-            <button onClick={handleScanClick}>Scan</button>
-
-
-            {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error message */}
-
-            {/* Render predictions */}
-            <div>
-                {predictions.length > 0 && (
-                    <h3>Predictions:</h3>
+                {uploadComplete && (
+                    <p className='upload-description'>{uploadCompleteText}</p>
                 )}
-                <ul>
-                    {predictions.map((prediction, index) => (
-                        <li key={index}>The prediction: {prediction}</li> // Adjust this based on your prediction structure
-                    ))}
-                </ul>
-            </div>
+
+                {/* <input type="file" multiple onChange={handleImageChange} /> */}
+                <button onClick={handleScanClick}>Scan</button>
+
+            
+            
+                {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error message */}
+
+                {/* Render predictions */}
+                {/* <div>
+                    {predictions.length > 0 && (
+                        <h3>Predictions:</h3>
+                    )}
+                    <ul>
+                        {predictions.map((prediction, index) => (
+                            <li key={index}>The prediction: {prediction}</li> // Adjust this based on your prediction structure
+                        ))}
+                    </ul>
+                </div> */}
+
+                <div>
+                    {predictions.length > 0 && (
+                        <>
+                            <h3>Prediction:</h3>
+                            <p>The scan shows, you have {translatePrediction(findMajorityPrediction(predictions))}</p>
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     );
