@@ -233,7 +233,7 @@ const Scan = () => {
     };
 
     return (
-        <div className='background-scan'>
+        <div className='scan-bg'>
             <div className='upload-predict-container'>
                 <h2>Skin Disease Prediction</h2>
                 <div className="upload-file">
@@ -266,11 +266,15 @@ const Scan = () => {
                     </ul>
                 </div> */}
 
-                <div>
+                <div className='predictpredict'>
                     {predictions.length > 0 && (
                         <>
                             <h3>Prediction:</h3>
-                            <p>The scan shows, you have {translatePrediction(findMajorityPrediction(predictions))}</p>
+                            <p>The scan shows, you have{' '}
+                                <span style={{ color: '#313E65' , fontWeight: 'bold'}}>
+                                    {translatePrediction(findMajorityPrediction(predictions))}.
+                                </span>
+                            </p>
                         </>
                     )}
                 </div>

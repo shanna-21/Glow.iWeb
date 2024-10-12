@@ -30,7 +30,7 @@ const App = () => {
   return (
     <div>
       {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
-      {!hideFooter.includes(location.pathname) && <Scan />}
+      {/* {!hideFooter.includes(location.pathname) && <Scan />} */}
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/take-quiz" element={<Products />} />
@@ -47,7 +47,8 @@ const App = () => {
       </Routes>
 
       <div className="footer-container">
-        <Footer />
+        {/* <Footer /> */}
+        {location.pathname !== '/scan' && <Footer />}
       </div>
     </div>
   );
