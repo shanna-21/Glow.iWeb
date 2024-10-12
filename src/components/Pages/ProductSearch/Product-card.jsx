@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
 ProductCard.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    image1: PropTypes.string.isRequired, // Updated to image1
+    image1: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     sold: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,

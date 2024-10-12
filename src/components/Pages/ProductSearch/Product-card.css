@@ -1,5 +1,7 @@
 .product-card {
   width: 300px;
+  height: 450px;
+  padding-bottom: 40px;
   background-color: #f9f9f9;
   border-radius: 10px;
   overflow: hidden;
@@ -9,7 +11,8 @@
 }
 
 .product-image img {
-  width: 100%;
+  width: 300px;
+  height: 250px;
 }
 
 
@@ -20,7 +23,7 @@
 }
 
 .product-price-mascot-container img {
-  width: 50%;
+  width: 100px;
 }
 
 .rating {
@@ -30,6 +33,14 @@
   padding-right: 15px;
   margin-bottom: 5px;
 }
+
+.product-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
 .product-details h2 {
   font-size: 18px;
   margin-bottom: 15px;
@@ -69,6 +80,10 @@
   margin-bottom: 20px;
 }
 
+.rating{
+  padding-top: 10px;
+}
+
 .rating span {
   font-size: 14px;
   font-weight: 300;
@@ -89,4 +104,8 @@
 
 .add-to-cart:hover {
   background-color: #005bb5;
+}
+
+.product-price-container{
+  padding-top: 10px;
 }
