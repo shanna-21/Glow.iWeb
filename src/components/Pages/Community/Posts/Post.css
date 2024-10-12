@@ -5,15 +5,16 @@
 
 .block-post{
     background-color: white;
-    margin-left: 225px;
+    /* margin-left: 225px; */
     padding: 50px 100px;
+    margin-top: 50px ;
     /* margin-top: -30px; */
     color: #313E65;
     border-radius: 20px;
 }
 
 .block-post button{
-    margin-right: 250px;
+    /* margin-right: 250px; */
     background: none;
     border: none;
     cursor: pointer;
@@ -41,6 +42,7 @@
 
 .post-desc{
     display: flex;
+    margin-top: 50px;
     justify-content: space-between;
     /* border-top: 1px black; */
 }
@@ -53,9 +55,39 @@
 .comment-block{
     background-color: white;
     margin-left: 40px;
+    margin-top: 50px;
     color: #313E65;
     padding: 30px 65px;
     border-radius: 20px;
+    justify-content: space-between;
+}
+
+.comment-block form{
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.comment-block input{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.comment-block button{
+    margin-left: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #88CFF1;
+    padding: 5px;
+}
+
+.comment-block button:hover{
+    margin-left: 5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #4a768a;
+    padding: 5px;
 }
 
 .comments{
@@ -106,4 +138,3 @@
     text-align: center;
     margin: 0 85px;
 }
-

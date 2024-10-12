@@ -4,6 +4,7 @@ import profile_img from '../../../../assets/profile-img.jfif';
 import { IonIcon } from '@ionic/react';
 import { heart } from 'ionicons/icons';
 
+
 const User = () => {
     const [username] = useState("user123");
     const [bio] = useState("This is a short bio about the user.");

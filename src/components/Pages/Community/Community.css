@@ -3,17 +3,17 @@
     margin: 0;
 }
 
-.comhead{
-    position: sticky;
-    top: -35px;
-    width: 1280px;
-    height: 150px;
-    overflow: hidden;
-    margin-bottom: 100px;
+.community-page{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    /* background-color: red; */
 }
 
 .comheadpic{
-    position: absolute;
+    /* position: absolute; */
     top: -80px;
     left: 0;
     width: 100%;
@@ -22,31 +22,38 @@
 
 .comsidebar{
     background-color: white;
-    width: 250px;
-    height: 250px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 400px;
     margin-left: 50px;
     margin-top: 50px;
+    padding: 20px;
+    margin-bottom: 20px;
     text-align: center;
     border-radius: 20px;
 }
 
 .community-page h1{
-    margin-left: 125px;
-    margin-bottom: -20px;
-    user-select: none;
+    /* margin-left: 125px;
+    margin-bottom: -20px; */
+    /* user-select: none;
+    justify-content: center;
     width: 100px;
-    color: #313E65;
-    position: fixed;
+    color: #313E65; */
+    /* position: fixed; */
 }
 
 .comsidebar{
-    position: fixed;
+    padding: 10px;
+    width: 30%;
+    /* position: fixed; */
 }
 
 .comsidebar .insidebar{
-    padding-top: 20px;
+    /* padding-top: 20px; */
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 10px;
 }
 
 .comsidebar .insidebar h3{
@@ -68,7 +75,7 @@
 }
 
 .forumcontent{
-    margin-left: 130px;
+    margin-left: 50px;
 }
 
 .trendz .blocks h4 svg{
@@ -82,6 +89,7 @@
     padding: 60px 100px;
     margin-bottom: 35px;
     border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     user-select: none;
@@ -89,7 +97,8 @@
 }
 
 .com-scroll {
-    margin-left: 250px;
+    padding-top: 50px;
+    /* margin-left: 250px; */
     height: 500px; 
     overflow-y: scroll; 
     /* margin-bottom: 20px; */

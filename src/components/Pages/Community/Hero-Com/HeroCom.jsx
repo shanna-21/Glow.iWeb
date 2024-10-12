@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import './HeroProfile.css'
+import './HeroCom.css'
 // import arrow from '../../assets/arrow.png'
 // import mail from '../../assets/email-icon.png'
 
 const Hero = () => {
   const [text, setText] = useState('')
-  const message = ".Profile";
+  const message = ".Community";
   const typingSpeed = 100;
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="hero-profile-container">
+    <div className="hero-com-container">
       <div className="hero-text">
         <h1>{text}</h1>
       </div>

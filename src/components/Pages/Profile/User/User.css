@@ -1,77 +1,76 @@
-
 .grand-user-container{
-    /* position: absolute; */
-    margin: 0;
-    padding: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    position: absolute;
-    /* background-color: red; */
+  /* position: absolute; */
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: absolute;
+  /* background-color: red; */
 }
 
 .profile-page-container {
   display: flex;
-  
+
   /* position: absolute; */
   height: 100%; /* Let the content grow to fit the container */
   overflow-y: auto; /* Enable vertical scroll when content overflows */
   padding: 20px; /* Optional padding */
 }
-  
-  /* Left section: User profile and details */
+
+/* Left section: User profile and details */
 .profile-section {
-    background-color: #fff;
-    width: 37%;
-    padding: 20px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+  background-color: #fff;
+  width: 37%;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
-  
+
 .profile-header {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
-  
+
 .profile-image {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
-  
+
 .profile-username {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #333;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
 }
-  
+
 .profile-bio {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 15px;
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 15px;
 }
-  
+
 .btn-logout {
-    padding: 10px 20px;
-    background-color: #88CFF1;
-    color: blacl;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  background-color: #88CFF1;
+  color: blacl;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-  
+
 .btn-logout:hover {
-    background-color: #224f64;
-    color: #fff;
+  background-color: #224f64;
+  color: #fff;
 }
-  
+
 .profile-details {
   margin: 30px;
   text-align: left;
@@ -79,14 +78,14 @@
   background-color: #fff; /* Optional: White background for a clean look */
     
 }
-  
+
 .profile-details h3 {
-    font-size: 1.2rem;
-    color: #555;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd; /* Light gray border */
-    border-radius: 10px;
+  font-size: 1.2rem;
+  color: #555;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 10px;
 }
 
 .profile-details h3:hover {
@@ -107,72 +106,72 @@
   border: 1px solid #313E65; /* Light gray border */
   border-radius: 10px;
 }
-  
-  .profile-details p {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 15px;
-  }
-  
-  /* Right section: Posts, Cart, Liked Forum, Saved Forum */
-  .activity-section {
-    width: 60%;
-    margin: 15px;
-  }
-  
-  .activity-container {
-    background-color: white;
-    padding: 20px;
-    overflow: auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .activity-container h3 {
-    font-size: 1.4rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .activity-container ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .activity-container li {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .activity-container li:last-child {
-    border-bottom: none;
-  }
 
-  .profile-pict {
-    width: 150px;           /* Set the width of the image */
-    height: 150px;          /* Set the height of the image */
-    border-radius: 50%;     /* Make the image circular */
-    object-fit: cover;      /* Ensures the image fits within the circle without stretching */
-    border: 2px solid #ccc; /* Optional: Add a border around the circle */
-  }
-  
-  .post-item {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    /* background-color: blue; */
-  }
-  
-  .post-header {
-    display: flex;
+.profile-details p {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+/* Right section: Posts, Cart, Liked Forum, Saved Forum */
+.activity-section {
+  width: 60%;
+  margin: 15px;
+}
+
+.activity-container {
+  background-color: white;
+  padding: 20px;
+  overflow: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.activity-container h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.activity-container ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.activity-container li {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.activity-container li:last-child {
+  border-bottom: none;
+}
+
+.profile-pict {
+  width: 150px;           /* Set the width of the image */
+  height: 150px;          /* Set the height of the image */
+  border-radius: 50%;     /* Make the image circular */
+  object-fit: cover;      /* Ensures the image fits within the circle without stretching */
+  border: 2px solid #ccc; /* Optional: Add a border around the circle */
+}
+
+.post-item {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  /* background-color: blue; */
+}
+
+.post-header {
+  display: flex;
   align-items: center;
   margin-bottom: 10px;
-  /* background-color: red; */
+/* background-color: red; */
 }
 
 .post-profile-pict {
@@ -196,7 +195,7 @@
 }
 
 .content-your-post{
-  width: 70%;
+  width: 70%; 
 }
 
 .liked-button{
@@ -242,7 +241,7 @@ ion-icon.active {
 .post-actions {
   display: flex;
   gap: 10px;
-  
+
 }
 
 .save-btn {
@@ -410,7 +409,7 @@ h1 {
 
 .add-comment-section{
   padding: 10px;
-  
+
   /* background-color: red; */
 }
 
@@ -418,7 +417,7 @@ h1 {
   padding: 10px;
   border-radius: 10px;
   margin-right: 10px;
-  
+
 }
 
 .add-comment-section button{
@@ -449,7 +448,7 @@ h1 {
   padding: 10px;
   border-radius: 10px;
   width: 500px;
-  
+
 }
 
 .add-post-container button{

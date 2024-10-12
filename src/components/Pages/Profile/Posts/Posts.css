@@ -1,5 +1,3 @@
-
-
 .profile-page-container {
   display: flex;
   justify-content: space-between;
@@ -218,6 +216,3 @@ ion-icon.active {
   background-color: #313E65;
   color: white;
 }
-
-
-
