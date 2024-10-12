@@ -1,3 +1,22 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.background-scan {
+  background: linear-gradient(rgba(8, 0, 58, 0.7), rgba(8, 0, 58, 0.7)), url('../../assets/home-bg-blue-flower.avif');
+  background-size: cover;
+  background-color: red; /* Not needed since you have a background image */
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 120vh; /* Full viewport height */
+  display: flex; /* Ensure contents are centered */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+}
+
+
 .upload-predict-container {
   display: flex;
   flex-direction: column;

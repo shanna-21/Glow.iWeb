@@ -126,7 +126,7 @@ const Scan = () => {
     const [uploadComplete, setUploadComplete] = useState(false);
     const [uploadCompleteText, setUploadCompleteText] = useState('');
     const uploadMessage = " You have successfully uploaded 3 images. Click the scan button to continue."
-    const typingSpeed = 50;
+    const typingSpeed = 0;
     const [error, setError] = useState(null); // State to hold error messages
 
     const handleImageChange = (event) => {
@@ -165,7 +165,7 @@ const Scan = () => {
 
         const formData = new FormData();
         for (let i = 0; i < images.length; i++) {
-            formData.append('images', images[i]);
+            formData.append('image', images[i]);
         }
         // images.forEach((image) => {
         //     formData.append('images', image);
@@ -202,36 +202,38 @@ const Scan = () => {
     };
 
     return (
-        <div className='upload-predict-container'>
-          <h2>Skin Disease Prediction</h2>
-            <div className="upload-file">
-            <label htmlFor="file-upload" className="custom-file-upload">
-                Choose Files
-            </label>
-            <input id="file-upload" type="file" multiple onChange={handleImageChange} />
-            </div>
+        <div className='background-scan'>
+            <div className='upload-predict-container'>
+                <h2>Skin Disease Prediction</h2>
+                <div className="upload-file">
+                <label htmlFor="file-upload" className="custom-file-upload">
+                    Choose Files
+                </label>
+                <input id="file-upload" type="file" multiple onChange={handleImageChange} />
+                </div>
 
-          {uploadComplete && (
-            <p className='upload-description'>{uploadCompleteText}</p>
-           )}
-
-          {/* <input type="file" multiple onChange={handleImageChange} /> */}
-          <button onClick={handleScanClick}>Scan</button>
-
-
-          {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error message */}
-
-          {/* Render predictions */}
-          <div>
-            {predictions.length > 0 && (
-                <h3>Predictions:</h3>
+            {uploadComplete && (
+                <p className='upload-description'>{uploadCompleteText}</p>
             )}
-            <ul>
-                {predictions.map((prediction, index) => (
-                    <li key={index}>{prediction}</li> // Adjust this based on your prediction structure
-                ))}
-            </ul>
-          </div>
+
+            {/* <input type="file" multiple onChange={handleImageChange} /> */}
+            <button onClick={handleScanClick}>Scan</button>
+
+
+            {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error message */}
+
+            {/* Render predictions */}
+            <div>
+                {predictions.length > 0 && (
+                    <h3>Predictions:</h3>
+                )}
+                <ul>
+                    {predictions.map((prediction, index) => (
+                        <li key={index}>The prediction: {prediction}</li> // Adjust this based on your prediction structure
+                    ))}
+                </ul>
+            </div>
+            </div>
         </div>
     );
 };

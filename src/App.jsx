@@ -19,14 +19,18 @@ import NewsPage from "./components/Pages/News/NewsPage/NewsPage.jsx";
 import Authentication from "./components/Pages/login/firstPage.jsx";
 import Landingpage from "./components/Pages/NoAuth/NoAuth.jsx"
 import Login from "./components//Pages/login/login.jsx"
+import Scan from "./components/Scan/Scan.jsx"
+import { loadBundle } from "firebase/firestore";
 
 const App = () => {
   const location = useLocation();
   const hideNavbarPaths = ["/", "/login", "/signup"];
+  const hideFooter = ["/scan"];
 
   return (
     <div>
       {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
+      {!hideFooter.includes(location.pathname) && <Scan />}
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/take-quiz" element={<Products />} />
@@ -39,6 +43,7 @@ const App = () => {
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Authentication/>}/>
         <Route path="/news" element={<News />} />
+        <Route path="/scan" element={<Scan />} />
       </Routes>
 
       <div className="footer-container">
