@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { db } from "../../../../../Backend/config";
-import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Auth functions
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { CgProfile } from "react-icons/cg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark as save } from '@fortawesome/free-regular-svg-icons';
@@ -10,8 +10,8 @@ import { faHeart as liked } from '@fortawesome/free-solid-svg-icons';
 import { IoIosArrowBack } from "react-icons/io";
 import './Post.css';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
-import { addDoc, collection, getDocs, serverTimestamp } from "firebase/firestore"; 
-import { useLocation } from 'react-router-dom';
+import { addDoc, collection, getDocs, doc, getDoc, serverTimestamp } from "firebase/firestore"; 
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const Posts = ({ post, onBack }) => {
   const commentRef = useRef();
@@ -22,17 +22,22 @@ const Posts = ({ post, onBack }) => {
   const [savedPosts, setSavedPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState([]);
   const [likedComments, setLikedComments] = useState({});
-  const auth = getAuth(); 
-  
+  const auth = getAuth();
+  const navigate = useNavigate(); // Initialize navigate
 
-  // Fetch user details
+  // Fetch user details correctly
   const fetchUserData = async (userId) => {
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      setUserDetails(docSnap.data());
-    } else {
-      console.error("No user details found");
+    try {
+      const docRef = doc(db, "users", userId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setUserDetails(docSnap.data()); // Store user details
+      } else {
+        console.error("No user details found");
+      }
+    } catch (error) {
+      console.error("Error fetching user details:", error.message);
     }
   };
 
@@ -40,7 +45,7 @@ const Posts = ({ post, onBack }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        fetchUserData(currentUser.uid);
+        fetchUserData(currentUser.uid); // Fetch user details if authenticated
       } else {
         setUser(null);
       }
@@ -51,10 +56,10 @@ const Posts = ({ post, onBack }) => {
 
   const handleAddComment = async (e) => {
     e.preventDefault();
-    const commentText = commentRef.current.value.trim(); 
+    const commentText = commentRef.current.value.trim();
     if (!commentText) return;
 
-    const usernameToUse = userDetails.firstName;
+    const usernameToUse = userDetails.firstName || "Anonymous"; // Use 'Anonymous' if firstName is unavailable
 
     try {
       await addDoc(collection(db, 'posts', post.id, 'comments'), {
@@ -70,7 +75,7 @@ const Posts = ({ post, onBack }) => {
 
       commentRef.current.value = ''; // Clear input
     } catch (error) {
-      console.error("Error adding comment: ", error.message);
+      console.error("Error adding comment:", error.message);
     }
   };
 
@@ -86,7 +91,7 @@ const Posts = ({ post, onBack }) => {
         }));
         setComments(commentsData);
       } catch (error) {
-        console.error("Error fetching comments: ", error);
+        console.error("Error fetching comments:", error);
       } finally {
         setLoading(false);
       }
@@ -117,11 +122,17 @@ const Posts = ({ post, onBack }) => {
   if (!post) {
     return <div>Post not found</div>;
   }
+  
+  const handleBack = () => {
+    navigate('/community'); // Navigate back to the community page
+  };
 
   return (
     <div className="full-post">
       <div className="block-post">
-        <button onClick={onBack}><IoIosArrowBack /></button>
+        <button onClick={onBack}> 
+          <IoIosArrowBack />
+        </button>
         <div className="in-post">
           <h2><CgProfile /> {post.user}</h2>
           <p>{post.content}</p>
@@ -144,9 +155,9 @@ const Posts = ({ post, onBack }) => {
           </div>
         </div>
         <div className="post-desc">
-          <h5>{post.views} views</h5>
-          <h5>{comments.length} comments</h5>
-          <h5>{post.likes} likes</h5>
+          <h5>{post.views} views </h5>
+          <h5>{comments.length} comments </h5>
+          <h5>{post.likes} likes </h5>
         </div>
       </div>
 

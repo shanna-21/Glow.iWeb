@@ -21,6 +21,7 @@ import Landingpage from "./components/Pages/NoAuth/NoAuth.jsx"
 import Login from "./components//Pages/login/login.jsx"
 import Scan from "./components/Scan/Scan.jsx"
 import { loadBundle } from "firebase/firestore";
+import Post from "./components/Pages/Community/Posts/Post.jsx";
 
 const App = () => {
   const location = useLocation();
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/take-quiz" element={<Products />} />
         <Route path="/community" element={<Community />} />
+        <Route path="/community/post/:id" element={<Post />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/products-search" element={<ProductSearch />} />

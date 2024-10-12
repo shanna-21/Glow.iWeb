@@ -113,7 +113,9 @@ const Community = () => {
               Most Liked
             </h3>
           </div>
+
           <div className="add-post-container">
+          <h2>Post Forum</h2>
             
              <textarea
                value={content}

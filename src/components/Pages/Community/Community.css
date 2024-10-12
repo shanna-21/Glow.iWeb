@@ -21,16 +21,36 @@
 }
 
 .comsidebar{
-    background-color: white;
+    /* background-color: red; */
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     width: 200px;
-    height: 400px;
+    height: 500px;
     margin-left: 50px;
     margin-top: 50px;
-    padding: 20px;
+    padding: 50px;
     margin-bottom: 20px;
     text-align: center;
     border-radius: 20px;
+}
+
+.comsidebar h1{
+    justify-content: left;
+    margin: 20px;
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #88CFF1;
+    border-radius: 30px;
+    /* background-color: ; */
+    /* text-align: left; */
+    /* background-color: red; */
+}
+
+.comsidebar h2{
+    justify-content: left;
+    margin: 20px;
+    padding: 5px;
+    text-align: left;
+    /* background-color: red; */
 }
 
 .community-page h1{
