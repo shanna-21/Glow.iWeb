@@ -1,2 +1,2 @@
-# Shanna Fernlie Portofolio
- My life in a web
+# glow.i web
+ Glow.i is a web-based platform designed to help individuals improve their skin health by offering AI-based skin problem identification, community discussions, and a dedicated e-commerce section for skincare products. It offers personalized recommendations based on scan result, a forum for users to exchange advice and experiences, and a curated marketplace to find products tailored to various skin needs.
